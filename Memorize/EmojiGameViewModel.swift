@@ -7,10 +7,9 @@
 //
 
 import SwiftUI
-import Foundation
 
-struct EmojiGameViewModel {
-    private(set) var model: GameModel<String> = EmojiGameViewModel.createGameModel()
+class EmojiGameViewModel: ObservableObject {
+    @Published private(set) var model: GameModel<String> = EmojiGameViewModel.createGameModel()
     
     static func createGameModel() -> GameModel<String> {
         var emojis = ["😇","😎","😘","😁","🧐", "🥳", "🤩", "🙁", "😤", "🤪", "🤓", "🙃"]

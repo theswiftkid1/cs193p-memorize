@@ -9,21 +9,19 @@
 import SwiftUI
 
 struct GameView: View {
-    var gameModel: EmojiGameViewModel
+    @ObservedObject var gameModel: EmojiGameViewModel
     
     var body: some View {
-        let cards = HStack {
+        HStack {
             ForEach(gameModel.cards) { card in
                 CardView(card: card)
-                .onTapGesture {
-                    self.gameModel.choose(card: card)
+                    .onTapGesture {
+                        self.gameModel.choose(card: card)
                 }
             }
         }
         .padding()
         .foregroundColor(Color.orange)
-        
-        return gameModel.cards.count >= 10 ? cards.font(.title) : cards.font(.largeTitle)
     }
 }
 
@@ -31,23 +29,34 @@ struct CardView: View {
     var card: GameModel<String>.Card
     
     var body: some View {
+        GeometryReader { geometry in
+            self.body(for: geometry.size)
+        }
+    }
+    
+    func body(for size: CGSize) -> some View {
         ZStack {
-            if card.faceUp {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.white)
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(lineWidth: 3)
+            if card.isFaceUp {
+                RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
+                RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
                 Text(card.content)
             } else {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill()
+                RoundedRectangle(cornerRadius: cornerRadius).fill()
             }
         }
-        .aspectRatio(0.75, contentMode: .fit)
+        .aspectRatio(cardAspectRatio, contentMode: .fit)
+        .font(Font.system(size: fontSize(for: size)))
+    }
+    
+    let cornerRadius: CGFloat = 10
+    let edgeLineWidth: CGFloat = 3
+    let fontScaleFactor: CGFloat = 0.75
+    let cardAspectRatio: CGFloat = 0.75
+
+    func fontSize(for size: CGSize) -> CGFloat {
+        min(size.width, size.height) * fontScaleFactor
     }
 }
-
-
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
