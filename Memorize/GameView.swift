@@ -12,12 +12,9 @@ struct GameView: View {
     @ObservedObject var gameModel: EmojiGameViewModel
     
     var body: some View {
-        HStack {
-            ForEach(gameModel.cards) { card in
-                CardView(card: card)
-                    .onTapGesture {
-                        self.gameModel.choose(card: card)
-                }
+        Grid(items: gameModel.cards) { card in
+            CardView(card: card).onTapGesture {
+                self.gameModel.choose(card: card)
             }
         }
         .padding()
@@ -52,7 +49,7 @@ struct CardView: View {
     let edgeLineWidth: CGFloat = 3
     let fontScaleFactor: CGFloat = 0.75
     let cardAspectRatio: CGFloat = 0.75
-
+    
     func fontSize(for size: CGSize) -> CGFloat {
         min(size.width, size.height) * fontScaleFactor
     }

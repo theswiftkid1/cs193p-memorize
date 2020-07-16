@@ -26,18 +26,10 @@ struct GameModel<CardContent> {
         cards.shuffle()
     }
     
-    func indexOf(of card: Card) -> Int {
-        for index in 0..<cards.count {
-            if (cards[index].id == card.id) {
-                return index
-            }
-        }
-        return 0
-    }
-    
     mutating func choose(card: Card) {
         print("Chosen card \(card)")
-        let cardIndex = indexOf(of: card)
-        cards[cardIndex].isFaceUp = !cards[cardIndex].isFaceUp
+        if let cardIndex = cards.firstIndex(of: card) {
+            cards[cardIndex].isFaceUp = !cards[cardIndex].isFaceUp
+        }
     }
 }
