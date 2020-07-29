@@ -18,7 +18,7 @@ struct GameModel<CardContent> {
         
     init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
         cards = Array<Card>()
-        for index in 0..<numberOfPairsOfCards {
+        for index in stride(from: numberOfPairsOfCards, to: 0, by: -1) {
             let content = cardContentFactory(index)
             cards.append(Card(id: index * 2, content: content))
             cards.append(Card(id: index * 2 + 1, content: content))

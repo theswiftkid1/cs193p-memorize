@@ -16,6 +16,7 @@ struct GameView: View {
             CardView(card: card).onTapGesture {
                 self.gameModel.choose(card: card)
             }
+            .padding()
         }
         .padding()
         .foregroundColor(Color.orange)
@@ -41,14 +42,14 @@ struct CardView: View {
                 RoundedRectangle(cornerRadius: cornerRadius).fill()
             }
         }
-        .aspectRatio(cardAspectRatio, contentMode: .fit)
         .font(Font.system(size: fontSize(for: size)))
+        .aspectRatio(cardAspectRatio, contentMode: .fit)
     }
     
     let cornerRadius: CGFloat = 10
     let edgeLineWidth: CGFloat = 3
     let fontScaleFactor: CGFloat = 0.75
-    let cardAspectRatio: CGFloat = 0.75
+    let cardAspectRatio: CGFloat = 2/3
     
     func fontSize(for size: CGSize) -> CGFloat {
         min(size.width, size.height) * fontScaleFactor
