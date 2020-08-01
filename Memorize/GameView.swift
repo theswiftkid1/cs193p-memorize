@@ -12,14 +12,40 @@ struct GameView: View {
     @ObservedObject var gameModel: EmojiGameViewModel
     
     var body: some View {
-        Grid(items: gameModel.cards) { card in
-            CardView(card: card).onTapGesture {
-                self.gameModel.choose(card: card)
+        VStack {
+            Text(gameModel.model.theme.name + "!")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .multilineTextAlignment(.center)
+                .padding(.top)
+            
+            Text("Points: \(gameModel.model.points)")
+            
+            Grid(items: gameModel.cards) { card in
+                CardView(card: card).onTapGesture {
+                    self.gameModel.choose(card: card)
+                }
+                .aspectRatio(2/3, contentMode: .fit)
+                .padding()
             }
             .padding()
+            .foregroundColor(gameModel.model.theme.color)
+
+            Button(action: {
+                self.gameModel.newGame()
+            }) {
+                Text("New Game")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.black)
+                    .padding()
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20.0)
+                            .stroke(gameModel.model.theme.color, lineWidth: 5)
+                            .foregroundColor(gameModel.model.theme.color)
+                )
+            }
         }
-        .padding()
-        .foregroundColor(Color.orange)
     }
 }
 
@@ -43,7 +69,6 @@ struct CardView: View {
             }
         }
         .font(Font.system(size: fontSize(for: size)))
-        .aspectRatio(cardAspectRatio, contentMode: .fit)
     }
     
     let cornerRadius: CGFloat = 10
@@ -59,6 +84,7 @@ struct CardView: View {
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
         let game = EmojiGameViewModel()
+        game.choose(card: game.cards[2])
         return GameView(gameModel: game)
     }
 }

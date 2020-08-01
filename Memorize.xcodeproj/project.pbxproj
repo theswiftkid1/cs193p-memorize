@@ -16,9 +16,11 @@
 		CA2FCAEB24B50C4C002B0403 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2FCAEA24B50C4C002B0403 /* GameModel.swift */; };
 		CA2FCAED24B50CA3002B0403 /* EmojiGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2FCAEC24B50CA3002B0403 /* EmojiGameViewModel.swift */; };
 		CA468E2924D203DF00CCC289 /* Array+Only.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA468E2824D203DF00CCC289 /* Array+Only.swift */; };
+		CA5D650A24D4A0DF001D33FE /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5D650924D4A0DF001D33FE /* Theme.swift */; };
 		CA650A0524C0EFE3002FFBF7 /* Array+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA650A0424C0EFE3002FFBF7 /* Array+Identifiable.swift */; };
 		CAD2EBE924BFAACF002A1747 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD2EBE824BFAACF002A1747 /* Grid.swift */; };
 		CAD2EBEB24BFADFE002A1747 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD2EBEA24BFADFE002A1747 /* GridLayout.swift */; };
+		CAD5B76524D5C6B1007B0224 /* Optional+IsDefined.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5B76424D5C6B1007B0224 /* Optional+IsDefined.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,9 +35,11 @@
 		CA2FCAEA24B50C4C002B0403 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		CA2FCAEC24B50CA3002B0403 /* EmojiGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiGameViewModel.swift; sourceTree = "<group>"; };
 		CA468E2824D203DF00CCC289 /* Array+Only.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Only.swift"; sourceTree = "<group>"; };
+		CA5D650924D4A0DF001D33FE /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		CA650A0424C0EFE3002FFBF7 /* Array+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Identifiable.swift"; sourceTree = "<group>"; };
 		CAD2EBE824BFAACF002A1747 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		CAD2EBEA24BFADFE002A1747 /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
+		CAD5B76424D5C6B1007B0224 /* Optional+IsDefined.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+IsDefined.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,9 +82,11 @@
 				CAD2EBE824BFAACF002A1747 /* Grid.swift */,
 				CAD2EBEA24BFADFE002A1747 /* GridLayout.swift */,
 				CA2FCAD824B50BF7002B0403 /* SceneDelegate.swift */,
+				CA5D650924D4A0DF001D33FE /* Theme.swift */,
 				CA2FCADC24B50BF8002B0403 /* Assets.xcassets */,
 				CA2FCAE124B50BF8002B0403 /* LaunchScreen.storyboard */,
 				CA2FCADE24B50BF8002B0403 /* Preview Content */,
+				CAD5B76424D5C6B1007B0224 /* Optional+IsDefined.swift */,
 			);
 			path = Memorize;
 			sourceTree = "<group>";
@@ -165,9 +171,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA2FCAD724B50BF7002B0403 /* AppDelegate.swift in Sources */,
+				CA5D650A24D4A0DF001D33FE /* Theme.swift in Sources */,
 				CA2FCAD924B50BF7002B0403 /* SceneDelegate.swift in Sources */,
 				CA2FCADB24B50BF7002B0403 /* GameView.swift in Sources */,
 				CA468E2924D203DF00CCC289 /* Array+Only.swift in Sources */,
+				CAD5B76524D5C6B1007B0224 /* Optional+IsDefined.swift in Sources */,
 				CA2FCAED24B50CA3002B0403 /* EmojiGameViewModel.swift in Sources */,
 				CA2FCAEB24B50C4C002B0403 /* GameModel.swift in Sources */,
 				CA650A0524C0EFE3002FFBF7 /* Array+Identifiable.swift in Sources */,

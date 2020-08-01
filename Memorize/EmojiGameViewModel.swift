@@ -12,14 +12,14 @@ class EmojiGameViewModel: ObservableObject {
     @Published private(set) var model: GameModel<String> = EmojiGameViewModel.createGameModel()
     
     static func createGameModel() -> GameModel<String> {
-        var emojis = ["😇","😎","😘","😁","🧐", "🥳", "🤩", "🙁", "😤", "🤪", "🤓", "🙃"]
-        let numberOfPairs = Int.random(in: 2...5)
-        return GameModel<String>(numberOfPairsOfCards: numberOfPairs) { index in
-            return emojis.remove(at: index)
+        let theme = themes.randomElement()!
+        let numberOfPairs = Int.random(in: 2...theme.emojis.count)
+        let themedEmojis = theme.emojis
+        return GameModel<String>(theme: theme, numberOfPairsOfCards: numberOfPairs) { index in
+            return themedEmojis[index]
         }
     }
-
-    
+    	
     // MARK: Access to the Model
     
     var cards: Array<GameModel<String>.Card> {
@@ -30,5 +30,9 @@ class EmojiGameViewModel: ObservableObject {
     
     func choose(card: GameModel<String>.Card) {
         model.choose(card: card)
+    }
+    
+    func newGame() {
+        model = EmojiGameViewModel.createGameModel()
     }
 }

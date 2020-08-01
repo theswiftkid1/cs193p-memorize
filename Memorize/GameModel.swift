@@ -8,6 +8,8 @@
 
 struct GameModel<CardContent> where CardContent: Equatable {
     var cards: Array<Card>
+    var theme: Theme
+    var points: Int
     
     struct Card: Identifiable {
         var id: Int
@@ -27,14 +29,25 @@ struct GameModel<CardContent> where CardContent: Equatable {
         }
     }
     
-    init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
+    init(theme: Theme,
+         numberOfPairsOfCards: Int,
+         cardContentFactory: (Int) -> CardContent) {
+        self.theme = theme
+        points = 0
         cards = Array<Card>()
-        for index in stride(from: numberOfPairsOfCards, to: 0, by: -1) {
+        let maxThemePairsOfCards = numberOfPairsOfCards >= theme.emojis.count ? theme.emojis.count - 1 : numberOfPairsOfCards
+        for index in stride(from: maxThemePairsOfCards, to: 0, by: -1) {
             let content = cardContentFactory(index)
             cards.append(Card(id: index * 2, content: content))
             cards.append(Card(id: index * 2 + 1, content: content))
         }
         cards.shuffle()
+    }
+    
+    func gameIsFinished() -> Bool {
+        return cards.firstIndex(where: { card in
+            card.isFaceUp == false
+        }).isNil
     }
     
     mutating func choose(card: Card) {
