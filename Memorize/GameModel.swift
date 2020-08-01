@@ -59,6 +59,9 @@ struct GameModel<CardContent> where CardContent: Equatable {
                 if cards[potentialMatch].content == cards[cardIndex].content {
                     cards[potentialMatch].isMatched = true
                     cards[cardIndex].isMatched = true
+                    points += 2
+                } else {
+                    points -= 1
                 }
                 cards[cardIndex].isFaceUp = true
             } else {

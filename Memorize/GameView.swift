@@ -11,6 +11,24 @@ import SwiftUI
 struct GameView: View {
     @ObservedObject var gameModel: EmojiGameViewModel
     
+    let cardAspectRatio: CGFloat = 2/3
+    
+    
+    var buttonOverlay: some View {
+        let rectangle = RoundedRectangle(cornerRadius: 20.0)
+        
+        switch gameModel.model.theme.color {
+        case let .Solid(color):
+            return AnyView(
+                rectangle
+                    .stroke(color, lineWidth: 5)
+                    .foregroundColor(color)
+            )
+        case let .Gradient(gradient):
+            return AnyView(rectangle.stroke(gradient, lineWidth: 5))
+        }
+    }
+    
     var body: some View {
         VStack {
             Text(gameModel.model.theme.name + "!")
@@ -22,15 +40,14 @@ struct GameView: View {
             Text("Points: \(gameModel.model.points)")
             
             Grid(items: gameModel.cards) { card in
-                CardView(card: card).onTapGesture {
+                CardView(card: card, theme: self.gameModel.model.theme).onTapGesture {
                     self.gameModel.choose(card: card)
                 }
-                .aspectRatio(2/3, contentMode: .fit)
+                .aspectRatio(self.cardAspectRatio, contentMode: .fit)
                 .padding()
             }
             .padding()
-            .foregroundColor(gameModel.model.theme.color)
-
+            
             Button(action: {
                 self.gameModel.newGame()
             }) {
@@ -39,11 +56,7 @@ struct GameView: View {
                     .fontWeight(.bold)
                     .foregroundColor(Color.black)
                     .padding()
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20.0)
-                            .stroke(gameModel.model.theme.color, lineWidth: 5)
-                            .foregroundColor(gameModel.model.theme.color)
-                )
+                    .overlay(buttonOverlay)
             }
         }
     }
@@ -51,6 +64,7 @@ struct GameView: View {
 
 struct CardView: View {
     var card: GameModel<String>.Card
+    var theme: Theme
     
     var body: some View {
         GeometryReader { geometry in
@@ -58,23 +72,46 @@ struct CardView: View {
         }
     }
     
+    var CardBorder: some View {
+        let rectangle = RoundedRectangle(cornerRadius: cornerRadius)
+            .stroke(lineWidth: edgeLineWidth)
+        
+        switch theme.color {
+        case let .Solid(color):
+            return AnyView(rectangle.fill(color))
+        case let .Gradient(gradient):
+            return AnyView(rectangle.fill(gradient))
+        }
+    }
+    
+    var CardBack: some View {
+        let rectangle = RoundedRectangle(cornerRadius: cornerRadius)
+        
+        switch theme.color {
+        case let .Solid(color):
+            return AnyView(rectangle.fill(color))
+        case let .Gradient(gradient):
+            return AnyView(rectangle.fill(gradient))
+        }
+    }
+    
+    
     func body(for size: CGSize) -> some View {
         ZStack {
             if card.isFaceUp {
                 RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
-                RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
+                CardBorder
                 Text(card.content)
             } else if !card.isMatched {
-                RoundedRectangle(cornerRadius: cornerRadius).fill()
+                CardBack
             }
         }
         .font(Font.system(size: fontSize(for: size)))
     }
     
     let cornerRadius: CGFloat = 10
-    let edgeLineWidth: CGFloat = 3
+    let edgeLineWidth: CGFloat = 5
     let fontScaleFactor: CGFloat = 0.75
-    let cardAspectRatio: CGFloat = 2/3
     
     func fontSize(for size: CGSize) -> CGFloat {
         min(size.width, size.height) * fontScaleFactor
