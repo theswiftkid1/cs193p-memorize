@@ -6,10 +6,13 @@
 //  Copyright © 2020 theswiftkid_. All rights reserved.
 //
 
+import Foundation
+
 struct GameModel<CardContent> where CardContent: Equatable {
     var cards: Array<Card>
     var theme: Theme
     var points: Int
+    var selectionTime: Date
     
     struct Card: Identifiable {
         var id: Int
@@ -35,6 +38,7 @@ struct GameModel<CardContent> where CardContent: Equatable {
         self.theme = theme
         points = 0
         cards = Array<Card>()
+        selectionTime = Date.init()
         let maxThemePairsOfCards = numberOfPairsOfCards >= theme.emojis.count ? theme.emojis.count - 1 : numberOfPairsOfCards
         for index in stride(from: maxThemePairsOfCards, to: 0, by: -1) {
             let content = cardContentFactory(index)
@@ -56,12 +60,16 @@ struct GameModel<CardContent> where CardContent: Equatable {
             !cards[cardIndex].isMatched {
             
             if let potentialMatch = currentFaceUpCardIndex {
+                let now = Date.init()
+                let interval = DateInterval(start: selectionTime, end: now).duration
+                
                 if cards[potentialMatch].content == cards[cardIndex].content {
                     cards[potentialMatch].isMatched = true
                     cards[cardIndex].isMatched = true
-                    points += 2
+                    points += max(10 - Int(interval), 1)
+                    selectionTime = now
                 } else {
-                    points -= 1
+                    points -= min(1 + Int(interval), 5)
                 }
                 cards[cardIndex].isFaceUp = true
             } else {

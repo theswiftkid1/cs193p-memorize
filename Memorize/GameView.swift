@@ -10,9 +10,9 @@ import SwiftUI
 
 struct GameView: View {
     @ObservedObject var gameModel: EmojiGameViewModel
-    
+    @State var gameTime = 0
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     let cardAspectRatio: CGFloat = 2/3
-    
     
     var buttonOverlay: some View {
         let rectangle = RoundedRectangle(cornerRadius: 20.0)
@@ -38,6 +38,11 @@ struct GameView: View {
                 .padding(.top)
             
             Text("Points: \(gameModel.model.points)")
+
+            Text("Time: \(gameTime) seconds")
+                .onReceive(timer) { _ in
+                    self.gameTime += 1
+            }
             
             Grid(items: gameModel.cards) { card in
                 CardView(card: card, theme: self.gameModel.model.theme).onTapGesture {
@@ -50,6 +55,7 @@ struct GameView: View {
             
             Button(action: {
                 self.gameModel.newGame()
+                self.gameTime = 0
             }) {
                 Text("New Game")
                     .font(.title)
