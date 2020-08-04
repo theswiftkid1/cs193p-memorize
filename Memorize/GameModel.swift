@@ -9,10 +9,10 @@
 import Foundation
 
 struct GameModel<CardContent> where CardContent: Equatable {
-    var cards: Array<Card>
-    var theme: Theme
-    var points: Int
-    var selectionTime: Date
+    private(set) var cards: Array<Card>
+    private(set) var theme: Theme
+    private(set) var points: Int
+    private var selectionTime: Date
     
     struct Card: Identifiable {
         var id: Int
@@ -21,7 +21,7 @@ struct GameModel<CardContent> where CardContent: Equatable {
         var content: CardContent
     }
     
-    var currentFaceUpCardIndex: Int? {
+    private var currentFaceUpCardIndex: Int? {
         get {
             cards.indices.filter { cards[$0].isFaceUp }.only
         }
@@ -46,12 +46,6 @@ struct GameModel<CardContent> where CardContent: Equatable {
             cards.append(Card(id: index * 2 + 1, content: content))
         }
         cards.shuffle()
-    }
-    
-    func gameIsFinished() -> Bool {
-        return cards.firstIndex(where: { card in
-            card.isFaceUp == false
-        }).isNil
     }
     
     mutating func choose(card: Card) {

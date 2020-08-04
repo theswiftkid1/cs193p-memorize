@@ -10,11 +10,11 @@ import SwiftUI
 
 struct GameView: View {
     @ObservedObject var gameModel: EmojiGameViewModel
-    @State var gameTime = 0
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    let cardAspectRatio: CGFloat = 2/3
+    @State private var gameTime = 0
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    private let cardAspectRatio: CGFloat = 2/3
     
-    var buttonOverlay: some View {
+    private var buttonOverlay: some View {
         let rectangle = RoundedRectangle(cornerRadius: 20.0)
         
         switch gameModel.model.theme.color {
@@ -70,15 +70,13 @@ struct GameView: View {
 
 struct CardView: View {
     var card: GameModel<String>.Card
+    
     var theme: Theme
+    private let cornerRadius: CGFloat = 10
+    private let edgeLineWidth: CGFloat = 5
+    private let fontScaleFactor: CGFloat = 0.75
     
-    var body: some View {
-        GeometryReader { geometry in
-            self.body(for: geometry.size)
-        }
-    }
-    
-    var CardBorder: some View {
+    private var CardBorder: some View {
         let rectangle = RoundedRectangle(cornerRadius: cornerRadius)
             .stroke(lineWidth: edgeLineWidth)
         
@@ -90,7 +88,7 @@ struct CardView: View {
         }
     }
     
-    var CardBack: some View {
+    private var CardBack: some View {
         let rectangle = RoundedRectangle(cornerRadius: cornerRadius)
         
         switch theme.color {
@@ -101,8 +99,11 @@ struct CardView: View {
         }
     }
     
-    
-    func body(for size: CGSize) -> some View {
+    private func fontSize(for size: CGSize) -> CGFloat {
+        min(size.width, size.height) * fontScaleFactor
+    }
+
+    private func body(for size: CGSize) -> some View {
         ZStack {
             if card.isFaceUp {
                 RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
@@ -115,12 +116,10 @@ struct CardView: View {
         .font(Font.system(size: fontSize(for: size)))
     }
     
-    let cornerRadius: CGFloat = 10
-    let edgeLineWidth: CGFloat = 5
-    let fontScaleFactor: CGFloat = 0.75
-    
-    func fontSize(for size: CGSize) -> CGFloat {
-        min(size.width, size.height) * fontScaleFactor
+    var body: some View {
+        GeometryReader { geometry in
+            self.body(for: geometry.size)
+        }
     }
 }
 

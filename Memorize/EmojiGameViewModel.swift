@@ -11,7 +11,7 @@ import SwiftUI
 class EmojiGameViewModel: ObservableObject {
     @Published private(set) var model: GameModel<String> = EmojiGameViewModel.createGameModel()
     
-    static func createGameModel() -> GameModel<String> {
+    private static func createGameModel() -> GameModel<String> {
         let theme = themes.randomElement()!
         let numberOfPairs = Int.random(in: 2...theme.emojis.count)
         let themedEmojis = theme.emojis
