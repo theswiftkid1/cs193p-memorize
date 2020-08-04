@@ -21,6 +21,7 @@
 		CAD2EBE924BFAACF002A1747 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD2EBE824BFAACF002A1747 /* Grid.swift */; };
 		CAD2EBEB24BFADFE002A1747 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD2EBEA24BFADFE002A1747 /* GridLayout.swift */; };
 		CAD5B76524D5C6B1007B0224 /* Optional+IsDefined.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5B76424D5C6B1007B0224 /* Optional+IsDefined.swift */; };
+		CAFD5E1F24D9F6D60092A5A7 /* Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFD5E1E24D9F6D60092A5A7 /* Pie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		CAD2EBE824BFAACF002A1747 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		CAD2EBEA24BFADFE002A1747 /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
 		CAD5B76424D5C6B1007B0224 /* Optional+IsDefined.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+IsDefined.swift"; sourceTree = "<group>"; };
+		CAFD5E1E24D9F6D60092A5A7 /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				CA2FCAE124B50BF8002B0403 /* LaunchScreen.storyboard */,
 				CA2FCADE24B50BF8002B0403 /* Preview Content */,
 				CAD5B76424D5C6B1007B0224 /* Optional+IsDefined.swift */,
+				CAFD5E1E24D9F6D60092A5A7 /* Pie.swift */,
 			);
 			path = Memorize;
 			sourceTree = "<group>";
@@ -176,6 +179,7 @@
 				CA2FCADB24B50BF7002B0403 /* GameView.swift in Sources */,
 				CA468E2924D203DF00CCC289 /* Array+Only.swift in Sources */,
 				CAD5B76524D5C6B1007B0224 /* Optional+IsDefined.swift in Sources */,
+				CAFD5E1F24D9F6D60092A5A7 /* Pie.swift in Sources */,
 				CA2FCAED24B50CA3002B0403 /* EmojiGameViewModel.swift in Sources */,
 				CA2FCAEB24B50C4C002B0403 /* GameModel.swift in Sources */,
 				CA650A0524C0EFE3002FFBF7 /* Array+Identifiable.swift in Sources */,

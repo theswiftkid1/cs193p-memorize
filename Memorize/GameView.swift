@@ -74,7 +74,7 @@ struct CardView: View {
     var theme: Theme
     private let cornerRadius: CGFloat = 10
     private let edgeLineWidth: CGFloat = 5
-    private let fontScaleFactor: CGFloat = 0.75
+    private let fontScaleFactor: CGFloat = 0.7
     
     private var CardBorder: some View {
         let rectangle = RoundedRectangle(cornerRadius: cornerRadius)
@@ -108,6 +108,10 @@ struct CardView: View {
             if card.isFaceUp {
                 RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
                 CardBorder
+                Pie(
+                    startAngle: Angle.degrees(-90),
+                    endAngle: Angle.degrees(-20)
+                ).padding(5).foregroundColor(.orange).opacity(0.3)
                 Text(card.content)
             } else if !card.isMatched {
                 CardBack
