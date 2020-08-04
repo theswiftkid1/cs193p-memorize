@@ -70,54 +70,27 @@ struct GameView: View {
 
 struct CardView: View {
     var card: GameModel<String>.Card
-    
     var theme: Theme
-    private let cornerRadius: CGFloat = 10
-    private let edgeLineWidth: CGFloat = 5
+    
     private let fontScaleFactor: CGFloat = 0.7
-    
-    private var CardBorder: some View {
-        let rectangle = RoundedRectangle(cornerRadius: cornerRadius)
-            .stroke(lineWidth: edgeLineWidth)
-        
-        switch theme.color {
-        case let .Solid(color):
-            return AnyView(rectangle.fill(color))
-        case let .Gradient(gradient):
-            return AnyView(rectangle.fill(gradient))
-        }
-    }
-    
-    private var CardBack: some View {
-        let rectangle = RoundedRectangle(cornerRadius: cornerRadius)
-        
-        switch theme.color {
-        case let .Solid(color):
-            return AnyView(rectangle.fill(color))
-        case let .Gradient(gradient):
-            return AnyView(rectangle.fill(gradient))
-        }
-    }
     
     private func fontSize(for size: CGSize) -> CGFloat {
         min(size.width, size.height) * fontScaleFactor
     }
-
+    
+    @ViewBuilder
     private func body(for size: CGSize) -> some View {
-        ZStack {
-            if card.isFaceUp {
-                RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
-                CardBorder
+        if card.isFaceUp || !card.isMatched {
+            ZStack {
                 Pie(
                     startAngle: Angle.degrees(-90),
                     endAngle: Angle.degrees(-20)
-                ).padding(5).foregroundColor(.orange).opacity(0.3)
+                ).padding(5).foregroundColor(.gray).opacity(0.2)
                 Text(card.content)
-            } else if !card.isMatched {
-                CardBack
             }
+            .cardify(isFaceUp: card.isFaceUp, theme: theme)
+            .font(Font.system(size: fontSize(for: size)))
         }
-        .font(Font.system(size: fontSize(for: size)))
     }
     
     var body: some View {

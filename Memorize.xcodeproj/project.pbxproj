@@ -22,6 +22,8 @@
 		CAD2EBEB24BFADFE002A1747 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD2EBEA24BFADFE002A1747 /* GridLayout.swift */; };
 		CAD5B76524D5C6B1007B0224 /* Optional+IsDefined.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5B76424D5C6B1007B0224 /* Optional+IsDefined.swift */; };
 		CAFD5E1F24D9F6D60092A5A7 /* Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFD5E1E24D9F6D60092A5A7 /* Pie.swift */; };
+		CAFD5E2124D9FCAD0092A5A7 /* View+Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFD5E2024D9FCAD0092A5A7 /* View+Cardify.swift */; };
+		CAFD5E2724D9FD5E0092A5A7 /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFD5E2624D9FD5E0092A5A7 /* Cardify.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		CAD2EBEA24BFADFE002A1747 /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
 		CAD5B76424D5C6B1007B0224 /* Optional+IsDefined.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+IsDefined.swift"; sourceTree = "<group>"; };
 		CAFD5E1E24D9F6D60092A5A7 /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
+		CAFD5E2024D9FCAD0092A5A7 /* View+Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Cardify.swift"; sourceTree = "<group>"; };
+		CAFD5E2624D9FD5E0092A5A7 /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +94,8 @@
 				CA2FCADE24B50BF8002B0403 /* Preview Content */,
 				CAD5B76424D5C6B1007B0224 /* Optional+IsDefined.swift */,
 				CAFD5E1E24D9F6D60092A5A7 /* Pie.swift */,
+				CAFD5E2024D9FCAD0092A5A7 /* View+Cardify.swift */,
+				CAFD5E2624D9FD5E0092A5A7 /* Cardify.swift */,
 			);
 			path = Memorize;
 			sourceTree = "<group>";
@@ -181,6 +187,8 @@
 				CAD5B76524D5C6B1007B0224 /* Optional+IsDefined.swift in Sources */,
 				CAFD5E1F24D9F6D60092A5A7 /* Pie.swift in Sources */,
 				CA2FCAED24B50CA3002B0403 /* EmojiGameViewModel.swift in Sources */,
+				CAFD5E2724D9FD5E0092A5A7 /* Cardify.swift in Sources */,
+				CAFD5E2124D9FCAD0092A5A7 /* View+Cardify.swift in Sources */,
 				CA2FCAEB24B50C4C002B0403 /* GameModel.swift in Sources */,
 				CA650A0524C0EFE3002FFBF7 /* Array+Identifiable.swift in Sources */,
 				CAD2EBEB24BFADFE002A1747 /* GridLayout.swift in Sources */,
