@@ -46,7 +46,9 @@ struct GameView: View {
             
             Grid(items: gameModel.cards) { card in
                 CardView(card: card, theme: self.gameModel.model.theme).onTapGesture {
-                    self.gameModel.choose(card: card)
+                    withAnimation(.easeInOut) {
+                        self.gameModel.choose(card: card)
+                    }
                 }
                 .aspectRatio(self.cardAspectRatio, contentMode: .fit)
                 .padding()
@@ -54,8 +56,10 @@ struct GameView: View {
             .padding()
             
             Button(action: {
-                self.gameModel.newGame()
-                self.gameTime = 0
+                withAnimation(.easeInOut) {
+                    self.gameModel.newGame()
+                    self.gameTime = 0
+                }
             }) {
                 Text("New Game")
                     .font(.title)
@@ -87,9 +91,12 @@ struct CardView: View {
                     endAngle: Angle.degrees(-20)
                 ).padding(5).foregroundColor(.gray).opacity(0.2)
                 Text(card.content)
+                    .rotationEffect(Angle.degrees(card.isMatched ? 360 : 0))
+                    .animation(card.isMatched ? Animation.linear(duration: 1).repeatForever(autoreverses: false) : .default)
             }
             .cardify(isFaceUp: card.isFaceUp, theme: theme)
             .font(Font.system(size: fontSize(for: size)))
+            .transition(.scale)
         }
     }
     
