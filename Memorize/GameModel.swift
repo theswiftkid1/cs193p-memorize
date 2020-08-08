@@ -12,13 +12,62 @@ struct GameModel<CardContent> where CardContent: Equatable {
     private(set) var cards: Array<Card>
     private(set) var theme: Theme
     private(set) var points: Int
-    private var selectionTime: Date
     
     struct Card: Identifiable {
         var id: Int
-        var isFaceUp: Bool = false
-        var isMatched: Bool = false
+        var isFaceUp: Bool = false {
+            didSet {
+                if isFaceUp {
+                    startUsingBonusTime()
+                } else {
+                    stopUsingBonusTime()
+                }
+            }
+            
+        }
+        var isMatched: Bool = false {
+            didSet {
+                stopUsingBonusTime()
+            }
+        }
         var content: CardContent
+        
+        // MARK: - Bonus Time
+        
+        var bonusTimeLimit: TimeInterval = 6
+        var lastFaceUpDate: Date?
+        var pastFaceUpTime: TimeInterval = 0
+        
+        private var faceUpTime: TimeInterval {
+            if let lastFaceUpDate = lastFaceUpDate {
+                return pastFaceUpTime + Date().timeIntervalSince(lastFaceUpDate)
+            } else {
+                return pastFaceUpTime
+            }
+        }
+        
+        var bonusTimeRemaining: Int {
+            max(0, Int(bonusTimeLimit - faceUpTime))
+        }
+
+        var hasEarnedBonus: Bool {
+            isMatched && bonusTimeRemaining > 0
+        }
+        
+        var isConsumingBonusTime: Bool {
+            isFaceUp && !isMatched && bonusTimeRemaining > 0
+        }
+        
+        private mutating func startUsingBonusTime() {
+            if isConsumingBonusTime, lastFaceUpDate == nil {
+                lastFaceUpDate = Date()
+            }
+        }
+        
+        private mutating func stopUsingBonusTime() {
+            pastFaceUpTime = faceUpTime
+            lastFaceUpDate = nil
+        }
     }
     
     private var currentFaceUpCardIndex: Int? {
@@ -38,7 +87,6 @@ struct GameModel<CardContent> where CardContent: Equatable {
         self.theme = theme
         points = 0
         cards = Array<Card>()
-        selectionTime = Date.init()
         let maxThemePairsOfCards = numberOfPairsOfCards >= theme.emojis.count ? theme.emojis.count - 1 : numberOfPairsOfCards
         for index in stride(from: maxThemePairsOfCards, to: 0, by: -1) {
             let content = cardContentFactory(index)
@@ -48,22 +96,20 @@ struct GameModel<CardContent> where CardContent: Equatable {
         cards.shuffle()
     }
     
+    // MARK: - Choose
+    
     mutating func choose(card: Card) {
         if let cardIndex = cards.firstIndex(of: card),
             !cards[cardIndex].isFaceUp,
             !cards[cardIndex].isMatched {
             
             if let potentialMatch = currentFaceUpCardIndex {
-                let now = Date.init()
-                let interval = DateInterval(start: selectionTime, end: now).duration
-                
                 if cards[potentialMatch].content == cards[cardIndex].content {
                     cards[potentialMatch].isMatched = true
                     cards[cardIndex].isMatched = true
-                    points += max(10 - Int(interval), 1)
-                    selectionTime = now
+                    points += 1 + cards[cardIndex].bonusTimeRemaining
                 } else {
-                    points -= min(1 + Int(interval), 5)
+                    points -= 1
                 }
                 cards[cardIndex].isFaceUp = true
             } else {
