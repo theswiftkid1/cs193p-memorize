@@ -45,11 +45,19 @@ struct GameModel<CardContent> where CardContent: Equatable {
                 return pastFaceUpTime
             }
         }
-        
-        var bonusTimeRemaining: Int {
-            max(0, Int(bonusTimeLimit - faceUpTime))
+
+        var bonusTimeRemaining: Double {
+            max(0, bonusTimeLimit - faceUpTime)
         }
 
+        var bonusTimeRemainingPercentage: Double {
+            (bonusTimeLimit > 0 && bonusTimeRemaining > 0) ? bonusTimeRemaining / bonusTimeLimit : 0
+        }
+
+        var bonusPointsRemaining: Int {
+            Int(bonusTimeRemaining)
+        }
+        
         var hasEarnedBonus: Bool {
             isMatched && bonusTimeRemaining > 0
         }
@@ -69,7 +77,7 @@ struct GameModel<CardContent> where CardContent: Equatable {
             lastFaceUpDate = nil
         }
     }
-    
+
     private var currentFaceUpCardIndex: Int? {
         get {
             cards.indices.filter { cards[$0].isFaceUp }.only
@@ -80,7 +88,7 @@ struct GameModel<CardContent> where CardContent: Equatable {
             }
         }
     }
-    
+
     init(theme: Theme,
          numberOfPairsOfCards: Int,
          cardContentFactory: (Int) -> CardContent) {
@@ -95,9 +103,9 @@ struct GameModel<CardContent> where CardContent: Equatable {
         }
         cards.shuffle()
     }
-    
+
     // MARK: - Choose
-    
+
     mutating func choose(card: Card) {
         if let cardIndex = cards.firstIndex(of: card),
             !cards[cardIndex].isFaceUp,
@@ -107,7 +115,7 @@ struct GameModel<CardContent> where CardContent: Equatable {
                 if cards[potentialMatch].content == cards[cardIndex].content {
                     cards[potentialMatch].isMatched = true
                     cards[cardIndex].isMatched = true
-                    points += 1 + cards[cardIndex].bonusTimeRemaining
+                    points += 1 + cards[cardIndex].bonusPointsRemaining
                 } else {
                     points -= 1
                 }

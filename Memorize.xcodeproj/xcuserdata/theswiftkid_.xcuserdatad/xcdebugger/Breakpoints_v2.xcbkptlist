@@ -3,4 +3,54 @@
    uuid = "DF31B480-D1D5-4376-BB31-BA45B56FE261"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EFAE3082-C14D-474A-9F0C-8630781ECE16"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Memorize/GameView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "startBonusTimeAnimation()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "EFAE3082-C14D-474A-9F0C-8630781ECE16 - 1a95cdfb501e52bb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Memorize.CardView.(startBonusTimeAnimation in _31A0552860FBEB687B15CBA85EEB5B40)() -&gt; ()"
+                  moduleName = "Memorize"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/theswiftkid_/Swift/Memorize/Memorize/GameView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "496">
+               </Location>
+               <Location
+                  uuid = "EFAE3082-C14D-474A-9F0C-8630781ECE16 - c7cf47f8650c4be5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in Memorize.CardView.(startBonusTimeAnimation in _31A0552860FBEB687B15CBA85EEB5B40)() -&gt; ()"
+                  moduleName = "Memorize"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/theswiftkid_/Swift/Memorize/Memorize/GameView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
+                  offsetFromSymbolStart = "67">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
