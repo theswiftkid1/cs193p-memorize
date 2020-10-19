@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CA2FCAD724B50BF7002B0403 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2FCAD624B50BF7002B0403 /* AppDelegate.swift */; };
-		CA2FCAD924B50BF7002B0403 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2FCAD824B50BF7002B0403 /* SceneDelegate.swift */; };
+		CA20F65C253E29F9002755F9 /* MemorizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA20F65B253E29F9002755F9 /* MemorizeApp.swift */; };
 		CA2FCADB24B50BF7002B0403 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2FCADA24B50BF7002B0403 /* GameView.swift */; };
 		CA2FCADD24B50BF8002B0403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA2FCADC24B50BF8002B0403 /* Assets.xcassets */; };
 		CA2FCAE024B50BF8002B0403 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA2FCADF24B50BF8002B0403 /* Preview Assets.xcassets */; };
@@ -27,9 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CA20F65B253E29F9002755F9 /* MemorizeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeApp.swift; sourceTree = "<group>"; };
 		CA2FCAD324B50BF7002B0403 /* Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memorize.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CA2FCAD624B50BF7002B0403 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CA2FCAD824B50BF7002B0403 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CA2FCADA24B50BF7002B0403 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		CA2FCADC24B50BF8002B0403 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CA2FCADF24B50BF8002B0403 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -59,6 +57,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA20F655253E291F002755F9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CAD5B76424D5C6B1007B0224 /* Optional+IsDefined.swift */,
+				CA650A0424C0EFE3002FFBF7 /* Array+Identifiable.swift */,
+				CA468E2824D203DF00CCC289 /* Array+Only.swift */,
+				CAFD5E2024D9FCAD0092A5A7 /* View+Cardify.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CA20F656253E293C002755F9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CAFD5E2624D9FD5E0092A5A7 /* Cardify.swift */,
+				CA2FCADA24B50BF7002B0403 /* GameView.swift */,
+				CAD2EBE824BFAACF002A1747 /* Grid.swift */,
+				CAD2EBEA24BFADFE002A1747 /* GridLayout.swift */,
+				CAFD5E1E24D9F6D60092A5A7 /* Pie.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CA20F65A253E29A6002755F9 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				CA2FCAEC24B50CA3002B0403 /* EmojiGameViewModel.swift */,
+				CA5D650924D4A0DF001D33FE /* Theme.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		CA20F65F253E2A12002755F9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CA2FCAEA24B50C4C002B0403 /* GameModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		CA2FCACA24B50BF7002B0403 = {
 			isa = PBXGroup;
 			children = (
@@ -79,23 +117,14 @@
 			isa = PBXGroup;
 			children = (
 				CA2FCAE424B50BF8002B0403 /* Info.plist */,
-				CA2FCAD624B50BF7002B0403 /* AppDelegate.swift */,
-				CA650A0424C0EFE3002FFBF7 /* Array+Identifiable.swift */,
-				CA468E2824D203DF00CCC289 /* Array+Only.swift */,
-				CAFD5E2624D9FD5E0092A5A7 /* Cardify.swift */,
-				CA2FCAEC24B50CA3002B0403 /* EmojiGameViewModel.swift */,
-				CA2FCAEA24B50C4C002B0403 /* GameModel.swift */,
-				CA2FCADA24B50BF7002B0403 /* GameView.swift */,
-				CAD2EBE824BFAACF002A1747 /* Grid.swift */,
-				CAD2EBEA24BFADFE002A1747 /* GridLayout.swift */,
-				CAD5B76424D5C6B1007B0224 /* Optional+IsDefined.swift */,
-				CAFD5E1E24D9F6D60092A5A7 /* Pie.swift */,
-				CA2FCAD824B50BF7002B0403 /* SceneDelegate.swift */,
-				CA5D650924D4A0DF001D33FE /* Theme.swift */,
-				CAFD5E2024D9FCAD0092A5A7 /* View+Cardify.swift */,
+				CA20F65B253E29F9002755F9 /* MemorizeApp.swift */,
 				CA2FCADC24B50BF8002B0403 /* Assets.xcassets */,
+				CA20F655253E291F002755F9 /* Extensions */,
 				CA2FCAE124B50BF8002B0403 /* LaunchScreen.storyboard */,
+				CA20F65F253E2A12002755F9 /* Models */,
 				CA2FCADE24B50BF8002B0403 /* Preview Content */,
+				CA20F65A253E29A6002755F9 /* ViewModels */,
+				CA20F656253E293C002755F9 /* Views */,
 			);
 			path = Memorize;
 			sourceTree = "<group>";
@@ -179,9 +208,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA2FCAD724B50BF7002B0403 /* AppDelegate.swift in Sources */,
+				CA20F65C253E29F9002755F9 /* MemorizeApp.swift in Sources */,
 				CA5D650A24D4A0DF001D33FE /* Theme.swift in Sources */,
-				CA2FCAD924B50BF7002B0403 /* SceneDelegate.swift in Sources */,
 				CA2FCADB24B50BF7002B0403 /* GameView.swift in Sources */,
 				CA468E2924D203DF00CCC289 /* Array+Only.swift in Sources */,
 				CAD5B76524D5C6B1007B0224 /* Optional+IsDefined.swift in Sources */,
@@ -260,7 +288,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -314,7 +342,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -332,6 +360,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Memorize/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Memorize/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -351,6 +380,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Memorize/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Memorize/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
