@@ -13,11 +13,51 @@ enum ThemeColor {
     case Gradient(AngularGradient)
 }
 
-struct Theme {
+extension ThemeColor: Encodable {
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .Solid(let color):
+            try container.encode(color)
+        case .Gradient(let gradient):
+            try container.encode(gradient)
+        }
+    }
+}
+
+extension Color: Encodable {
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(self.description)
+    }
+}
+
+extension AngularGradient: Encodable {
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode("rainbow gradient")
+    }
+}
+
+struct Theme: Encodable {
     var name: String
     var emojis: [String]
     var color: ThemeColor
     var numberOfPairs: Int
+
+    fileprivate init(name: String,
+                     emojis: [String],
+                     color: ThemeColor,
+                     numberOfPairs: Int) {
+        self.name = name
+        self.emojis = emojis
+        self.color = color
+        self.numberOfPairs = numberOfPairs
+    }
+
+    var json: Data? {
+        return try? JSONEncoder().encode(self)
+    }
 }
 
 let themes = [
