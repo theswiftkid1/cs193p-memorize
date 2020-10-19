@@ -90,12 +90,11 @@ struct GameModel<CardContent> where CardContent: Equatable {
     }
 
     init(theme: Theme,
-         numberOfPairsOfCards: Int,
          cardContentFactory: (Int) -> CardContent) {
         self.theme = theme
         points = 0
         cards = Array<Card>()
-        let maxThemePairsOfCards = numberOfPairsOfCards >= theme.emojis.count ? theme.emojis.count - 1 : numberOfPairsOfCards
+        let maxThemePairsOfCards = theme.numberOfPairs >= theme.emojis.count ? theme.emojis.count - 1 : theme.numberOfPairs
         for index in stride(from: maxThemePairsOfCards, to: 0, by: -1) {
             let content = cardContentFactory(index)
             cards.append(Card(id: index * 2, content: content))

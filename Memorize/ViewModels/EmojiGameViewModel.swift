@@ -13,9 +13,8 @@ class EmojiGameViewModel: ObservableObject {
     
     private static func createGameModel() -> GameModel<String> {
         let theme = themes.randomElement()!
-        let numberOfPairs = Int.random(in: 2...theme.emojis.count)
         let themedEmojis = theme.emojis
-        return GameModel<String>(theme: theme, numberOfPairsOfCards: numberOfPairs) { index in
+        return GameModel<String>(theme: theme) { index in
             return themedEmojis[index]
         }
     }
