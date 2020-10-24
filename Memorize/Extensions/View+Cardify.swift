@@ -9,7 +9,7 @@
 import SwiftUI
 
 extension View {
-    func cardify(isFaceUp: Bool, theme: Theme) -> some View {
+    func cardify(isFaceUp: Bool, theme: EmojiTheme) -> some View {
         return self.modifier(Cardify(isFaceUp: isFaceUp, theme: theme))
     }
 }

@@ -13,7 +13,7 @@ struct Cardify: AnimatableModifier {
     var isFaceUp: Bool {
         rotation < 90 ? true : false
     }
-    var theme: Theme
+    var theme: EmojiTheme
     var animatableData: Double {
         get { return rotation }
         set { rotation = newValue }
@@ -22,7 +22,7 @@ struct Cardify: AnimatableModifier {
     private let cornerRadius: CGFloat = 10
     private let edgeLineWidth: CGFloat = 5
     
-    init(isFaceUp: Bool, theme: Theme) {
+    init(isFaceUp: Bool, theme: EmojiTheme) {
         rotation = isFaceUp ? 0 : 180
         self.theme = theme
     }
@@ -34,8 +34,8 @@ struct Cardify: AnimatableModifier {
         switch theme.color {
         case let .Solid(color):
             return AnyView(rectangle.fill(color))
-        case let .Gradient(gradient):
-            return AnyView(rectangle.fill(gradient))
+        case let .Gradient(gradientType):
+            return AnyView(rectangle.fill(gradientType.gradient))
         }
     }
     
@@ -45,8 +45,8 @@ struct Cardify: AnimatableModifier {
         switch theme.color {
         case let .Solid(color):
             return AnyView(rectangle.fill(color))
-        case let .Gradient(gradient):
-            return AnyView(rectangle.fill(gradient))
+        case let .Gradient(gradientType):
+            return AnyView(rectangle.fill(gradientType.gradient))
         }
     }
     

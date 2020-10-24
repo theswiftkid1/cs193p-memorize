@@ -9,18 +9,23 @@
 import SwiftUI
 import Foundation
 
-class EmojiGameViewModel: ObservableObject {
-    @Published private(set) var model: GameModel<String> = EmojiGameViewModel.createGameModel()
-    
-    private static func createGameModel() -> GameModel<String> {
-        let theme = themes.randomElement()!
+class EmojiGame: ObservableObject {
+    @State private var theme: EmojiTheme
+    @Published private(set) var model: GameModel<String>
+
+    init(theme: EmojiTheme) {
+        self.theme = theme
+        model = EmojiGame.createGameModel(theme: theme)
+    }
+
+    private static func createGameModel(theme: EmojiTheme) -> GameModel<String> {
         let themedEmojis = theme.emojis
         print("Random theme \(theme.json?.utf8 ?? "nil")")
         return GameModel<String>(theme: theme) { index in
             return themedEmojis[index]
         }
     }
-    	
+
     // MARK: Access to the Model
     
     var cards: Array<GameModel<String>.Card> {
@@ -34,6 +39,6 @@ class EmojiGameViewModel: ObservableObject {
     }
     
     func newGame() {
-        model = EmojiGameViewModel.createGameModel()
+        model = EmojiGame.createGameModel(theme: theme)
     }
 }

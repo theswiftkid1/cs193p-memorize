@@ -8,8 +8,8 @@
 
 import SwiftUI
 
-struct GameView: View {
-    @ObservedObject var gameModel: EmojiGameViewModel
+struct EmojiGameView: View {
+    @ObservedObject var game: EmojiGame
     @State private var gameTime = 0
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     private let cardAspectRatio: CGFloat = 2/3
@@ -17,37 +17,37 @@ struct GameView: View {
     private var buttonOverlay: some View {
         let rectangle = RoundedRectangle(cornerRadius: 20.0)
         
-        switch gameModel.model.theme.color {
+        switch game.model.theme.color {
         case let .Solid(color):
             return AnyView(
                 rectangle
                     .stroke(color, lineWidth: 5)
                     .foregroundColor(color)
             )
-        case let .Gradient(gradient):
-            return AnyView(rectangle.stroke(gradient, lineWidth: 5))
+        case let .Gradient(gradientType):
+            return AnyView(rectangle.stroke(gradientType.gradient, lineWidth: 5))
         }
     }
     
     var body: some View {
         VStack {
-            Text(gameModel.model.theme.name + "!")
+            Text(game.model.theme.name + "!")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
                 .padding(.top)
             
-            Text("Points: \(gameModel.model.points)")
+            Text("Points: \(game.model.points)")
             
             Text("Time: \(gameTime) seconds")
                 .onReceive(timer) { _ in
                     self.gameTime += 1
             }
             
-            Grid(items: gameModel.cards) { card in
-                CardView(card: card, theme: self.gameModel.model.theme).onTapGesture {
+            Grid(items: game.cards) { card in
+                CardView(card: card, theme: game.model.theme).onTapGesture {
                     withAnimation(.easeInOut) {
-                        self.gameModel.choose(card: card)
+                        self.game.choose(card: card)
                     }
                 }
                 .aspectRatio(self.cardAspectRatio, contentMode: .fit)
@@ -57,7 +57,7 @@ struct GameView: View {
             
             Button(action: {
                 withAnimation(.easeInOut) {
-                    self.gameModel.newGame()
+                    self.game.newGame()
                     self.gameTime = 0
                 }
             }) {
@@ -74,7 +74,7 @@ struct GameView: View {
 
 struct CardView: View {
     var card: GameModel<String>.Card
-    var theme: Theme
+    var theme: EmojiTheme
     
     @State private var animatedBonusRemaining: Double = 0
     
@@ -134,8 +134,8 @@ struct CardView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        let game = EmojiGameViewModel()
+        let game = EmojiGame(theme: EmojiTheme())
         game.choose(card: game.cards[2])
-        return GameView(gameModel: game)
+        return EmojiGameView(game: game)
     }
 }

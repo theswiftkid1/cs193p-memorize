@@ -10,7 +10,7 @@ import Foundation
 
 struct GameModel<CardContent> where CardContent: Equatable {
     private(set) var cards: Array<Card>
-    private(set) var theme: Theme
+    private(set) var theme: EmojiTheme
     private(set) var points: Int
     
     struct Card: Identifiable {
@@ -89,7 +89,7 @@ struct GameModel<CardContent> where CardContent: Equatable {
         }
     }
 
-    init(theme: Theme,
+    init(theme: EmojiTheme,
          cardContentFactory: (Int) -> CardContent) {
         self.theme = theme
         points = 0
