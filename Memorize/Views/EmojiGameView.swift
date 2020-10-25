@@ -21,8 +21,8 @@ struct EmojiGameView: View {
         case let .Solid(color):
             return AnyView(
                 rectangle
-                    .stroke(color, lineWidth: 5)
-                    .foregroundColor(color)
+                    .stroke(color.color, lineWidth: 5)
+                    .foregroundColor(color.color)
             )
         case let .Gradient(gradientType):
             return AnyView(rectangle.stroke(gradientType.gradient, lineWidth: 5))
@@ -31,18 +31,12 @@ struct EmojiGameView: View {
     
     var body: some View {
         VStack {
-            Text(game.model.theme.name + "!")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .multilineTextAlignment(.center)
-                .padding(.top)
-            
             Text("Points: \(game.model.points)")
             
             Text("Time: \(gameTime) seconds")
                 .onReceive(timer) { _ in
                     self.gameTime += 1
-            }
+                }
             
             Grid(items: game.cards) { card in
                 CardView(card: card, theme: game.model.theme).onTapGesture {
@@ -101,8 +95,8 @@ struct CardView: View {
                             startAngle: Angle.degrees(-90),
                             endAngle: Angle.degrees(-animatedBonusRemaining * 360 - 90)
                         )
-                            .onAppear {
-                                self.startBonusTimeAnimation()
+                        .onAppear {
+                            self.startBonusTimeAnimation()
                         }
                     } else {
                         Pie(

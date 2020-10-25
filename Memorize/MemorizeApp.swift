@@ -10,43 +10,43 @@ import SwiftUI
 
 @main
 struct MemorizeApp: App {
-    private let store = EmojiThemeStore(named: "Memorize")
+    private let store = EmojiThemeStore(named: "Memorize Themes")
 
     private let themes = [
         EmojiTheme(
             name: "Emojis",
             emojis: ["😇","😎","😘","😁","🧐","🥳","🤩"],
-            color: .Solid(.blue),
+            color: .Solid(CodableColor(color: .blue)),
             numberOfPairs: 4
         ),
         EmojiTheme(
             name: "Places",
             emojis: ["🌇","🎇","🌄","🌌","🌉","🌅","🏞"],
-            color: .Solid(.green),
+            color: .Solid(CodableColor(color: .green)),
             numberOfPairs: 3
         ),
         EmojiTheme(
             name: "Fire",
             emojis: ["💯","❗️","♥️","🚩","🎈","💥","🔥"],
-            color: .Solid(.red),
+            color: .Solid(CodableColor(color: .red)),
             numberOfPairs: 6
         ),
         EmojiTheme(
             name: "Apple",
             emojis: ["👨‍💻","👩‍💻","📱","💻","🖥","🖱","⌨️"],
-            color: .Solid(.gray),
+            color: .Solid(CodableColor(color: .gray)),
             numberOfPairs: 5
         ),
         EmojiTheme(
             name: "Music",
             emojis: ["👩‍🎤","🎸","🎤","🎻","🎺","🥁","👨‍🎤"],
-            color: .Solid(.purple),
+            color: .Solid(CodableColor(color: .purple)),
             numberOfPairs: 4
         ),
         EmojiTheme(
             name: "Dark",
             emojis: ["🖤","♣️","🏴","♠️","🕶","🎱","☕️"],
-            color: .Solid(.black),
+            color: .Solid(CodableColor(color: .black)),
             numberOfPairs: 4
         ),
         EmojiTheme(
@@ -58,7 +58,7 @@ struct MemorizeApp: App {
     ]
 
     init() {
-        store.addThemes(themes)
+//        store.addThemes(themes)
     }
 
     var body: some Scene {

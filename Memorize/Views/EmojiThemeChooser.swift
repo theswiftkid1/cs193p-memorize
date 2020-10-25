@@ -11,15 +11,21 @@ import SwiftUI
 struct EmojiThemeChooser: View {
     @EnvironmentObject private var store: EmojiThemeStore
     @State private var editMode: EditMode = .inactive
-
+    
     var body: some View {
         NavigationView {
             List {
                 ForEach(store.themes) { theme in
-                    NavigationLink(destination: EmojiGameView(game: EmojiGame(theme: theme))) {
-                        VStack {
-                            Text(theme.name)
-                            Text("All of: " + theme.emojis.joined())
+                    NavigationLink(
+                        destination:
+                            EmojiGameView(game: EmojiGame(theme: theme))
+                                .navigationBarTitle(theme.name + "!")
+                    ) {
+                        VStack(alignment: .leading) {
+                            EditableText(store.name(for: theme), isEditing: editMode.isEditing) { name in
+                                store.setName(name, for: theme)
+                            }
+                            Text(theme.emojis.joined())
                         }
                     }
                 }
@@ -32,7 +38,7 @@ struct EmojiThemeChooser: View {
             .navigationBarTitle(store.name)
             .navigationBarItems(
                 leading: Button {
-                    store.addTheme()
+                    store.addUntitledTheme()
                 } label: {
                     Image(systemName: "plus").imageScale(.large)
                 },

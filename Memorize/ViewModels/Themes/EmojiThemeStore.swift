@@ -17,7 +17,7 @@ class EmojiThemeStore: ObservableObject {
 
     init(named name: String = "Memorize") {
         self.name = name
-        let defaultsKey = "Memorize.\(name)"
+        let defaultsKey = "EmojiThemeStore.\(name)"
         themeNames = Dictionary(fromPropertyList: UserDefaults.standard.object(forKey: defaultsKey))
         themesAutosave = $themeNames.sink { names in
             UserDefaults.standard.set(names.asPropertyList, forKey: defaultsKey)
@@ -39,8 +39,14 @@ class EmojiThemeStore: ObservableObject {
         themeNames.keys.sorted { themeNames[$0]! < themeNames[$1]! }
     }
 
-    func addTheme(named name: String = "Untitled") {
-        themeNames[EmojiTheme()] = name
+    func addUntitledTheme() {
+        let untitledTheme = EmojiTheme(
+            name: "Untitled",
+            emojis: [],
+            color: .Solid(CodableColor(color: .red)),
+            numberOfPairs: 0
+        )
+        themeNames[untitledTheme] = untitledTheme.name
     }
 
     func addThemes(_ themes: [EmojiTheme]) {

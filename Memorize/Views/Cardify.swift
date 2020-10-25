@@ -33,7 +33,7 @@ struct Cardify: AnimatableModifier {
         
         switch theme.color {
         case let .Solid(color):
-            return AnyView(rectangle.fill(color))
+            return AnyView(rectangle.fill(color.color))
         case let .Gradient(gradientType):
             return AnyView(rectangle.fill(gradientType.gradient))
         }
@@ -44,7 +44,7 @@ struct Cardify: AnimatableModifier {
         
         switch theme.color {
         case let .Solid(color):
-            return AnyView(rectangle.fill(color))
+            return AnyView(rectangle.fill(color.color))
         case let .Gradient(gradientType):
             return AnyView(rectangle.fill(gradientType.gradient))
         }

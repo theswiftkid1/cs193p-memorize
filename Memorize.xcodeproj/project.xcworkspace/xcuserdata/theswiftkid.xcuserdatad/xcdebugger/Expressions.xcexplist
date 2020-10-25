@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "EmojiTheme.init(id:):EmojiTheme.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in EmojiThemeStore.init(named:):EmojiThemeStore.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Dictionary&lt;&gt;.init(fromPropertyList:):EmojiThemeStore.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ThemeColor.init(from:):EmojiTheme.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "decoder.unkeyedContainer()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Dictionary&lt;&gt;.asPropertyList.getter:EmojiThemeStore.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
