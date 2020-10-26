@@ -11,6 +11,7 @@ import SwiftUI
 struct EmojiThemeChooser: View {
     @EnvironmentObject private var store: EmojiThemeStore
     @State private var editMode: EditMode = .inactive
+    @State private var showThemeEditor: Bool = false
     
     var body: some View {
         NavigationView {
@@ -21,9 +22,18 @@ struct EmojiThemeChooser: View {
                             EmojiGameView(game: EmojiGame(theme: theme))
                                 .navigationBarTitle(theme.name + "!")
                     ) {
-                        VStack(alignment: .leading) {
-                            EditableText(store.name(for: theme), isEditing: editMode.isEditing) { name in
-                                store.setName(name, for: theme)
+                        VStack(alignment: .leading, spacing: 10) {
+                            if (editMode.isEditing) {
+                                Text("Edit " + store.name(for: theme))
+                                    .foregroundColor(.blue)
+                                    .onTapGesture {
+                                        showThemeEditor = true
+                                    }
+                                    .popover(isPresented: $showThemeEditor) {
+                                        EmojiThemeEditor(theme: theme, isShowing: $showThemeEditor)
+                                    }
+                            } else {
+                                Text(theme.name)
                             }
                             Text(theme.emojis.joined())
                         }

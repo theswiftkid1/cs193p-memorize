@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45383AFB254767E100BC34E5 /* EmojiThemeEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45383AFA254767E100BC34E5 /* EmojiThemeEditor.swift */; };
 		45B0E8562546121C004ED0EC /* EditableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0E8552546121C004ED0EC /* EditableText.swift */; };
 		45B0E85C25461496004ED0EC /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0E85B25461496004ED0EC /* ThemeColor.swift */; };
 		CA20F65C253E29F9002755F9 /* MemorizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA20F65B253E29F9002755F9 /* MemorizeApp.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		45383AFA254767E100BC34E5 /* EmojiThemeEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiThemeEditor.swift; sourceTree = "<group>"; };
 		45B0E8552546121C004ED0EC /* EditableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableText.swift; sourceTree = "<group>"; };
 		45B0E85B25461496004ED0EC /* ThemeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
 		CA20F65B253E29F9002755F9 /* MemorizeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeApp.swift; sourceTree = "<group>"; };
@@ -101,12 +103,13 @@
 			isa = PBXGroup;
 			children = (
 				CAFD5E2624D9FD5E0092A5A7 /* Cardify.swift */,
+				45B0E8552546121C004ED0EC /* EditableText.swift */,
 				CA2FCADA24B50BF7002B0403 /* EmojiGameView.swift */,
 				CAD5036D254497C900E56B6E /* EmojiThemeChooser.swift */,
+				45383AFA254767E100BC34E5 /* EmojiThemeEditor.swift */,
 				CAD2EBE824BFAACF002A1747 /* Grid.swift */,
 				CAD2EBEA24BFADFE002A1747 /* GridLayout.swift */,
 				CAFD5E1E24D9F6D60092A5A7 /* Pie.swift */,
-				45B0E8552546121C004ED0EC /* EditableText.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				CAD5B76524D5C6B1007B0224 /* Optional+IsDefined.swift in Sources */,
 				CAFD5E1F24D9F6D60092A5A7 /* Pie.swift in Sources */,
 				CA2FCAED24B50CA3002B0403 /* EmojiGame.swift in Sources */,
+				45383AFB254767E100BC34E5 /* EmojiThemeEditor.swift in Sources */,
 				CAD5036E254497C900E56B6E /* EmojiThemeChooser.swift in Sources */,
 				CAFD5E2724D9FD5E0092A5A7 /* Cardify.swift in Sources */,
 				CAFD5E2124D9FCAD0092A5A7 /* View+Cardify.swift in Sources */,

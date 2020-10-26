@@ -10,7 +10,7 @@ import SwiftUI
 
 @main
 struct MemorizeApp: App {
-    private let store = EmojiThemeStore(named: "Memorize Themes")
+    private let store = EmojiThemeStore()
 
     private let themes = [
         EmojiTheme(
@@ -58,7 +58,9 @@ struct MemorizeApp: App {
     ]
 
     init() {
-//        store.addThemes(themes)
+        if (store.themes.isEmpty) {
+            store.addThemes(themes)
+        }
     }
 
     var body: some Scene {

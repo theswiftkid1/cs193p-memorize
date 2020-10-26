@@ -15,7 +15,7 @@ class EmojiThemeStore: ObservableObject {
     @Published private var themeNames = [EmojiTheme:String]()
     private var themesAutosave: AnyCancellable?
 
-    init(named name: String = "Memorize") {
+    init(named name: String = "Default") {
         self.name = name
         let defaultsKey = "EmojiThemeStore.\(name)"
         themeNames = Dictionary(fromPropertyList: UserDefaults.standard.object(forKey: defaultsKey))
