@@ -12,6 +12,12 @@ struct EmojiThemeEditor: View {
     @ObservedObject var theme: EmojiTheme
     @Binding var isShowing: Bool
     @State private var themeName: String = ""
+    @State private var emojisToAdd: String = ""
+    
+    let fontSize: CGFloat = 40
+    var height: CGFloat {
+        CGFloat((theme.emojis.count - 1) / 6 * 70 + 70)
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -31,7 +37,7 @@ struct EmojiThemeEditor: View {
             }
             
             Divider()
-
+            
             Form {
                 Section {
                     TextField("Theme Name", text: $themeName) { began in
@@ -40,6 +46,59 @@ struct EmojiThemeEditor: View {
                         }
                     }
                 }
+                
+                Section(header: Text("Add Emojis")) {
+                    HStack {
+                        TextField("Emoji", text: $emojisToAdd)
+                        Button {
+                            theme.addEmojis(Array(arrayLiteral: emojisToAdd))
+                        } label: {
+                            Text("Add")
+                                .foregroundColor(.blue)
+                        }
+                    }
+                }
+                
+                Section(header: Text("Emojis")) {
+                    Grid(theme.emojis, id: \.self) { emoji in
+                        Text(emoji)
+                            .font(Font.system(size: fontSize))
+                            .onTapGesture {
+                                theme.removeEmoji(emoji)
+                            }
+                    }
+                    .frame(height: height)
+                }
+
+                Section(header: Text("Card Count")) {
+                    HStack {
+                        Text(String(theme.numberOfPairs) + " Pairs")
+                        Stepper(
+                            onIncrement: {
+                                theme.incrementNumberOfPairs()
+                            },
+                            onDecrement: {
+                                theme.decrementNumberOfPairs()
+                            },
+                            label: {
+                                EmptyView()
+                            }
+                        )
+                    }
+                }
+                
+                Section(header: Text("Color")) {
+//                    Grid(theme., id: \.self) { emoji in
+//                        Text(emoji)
+//                            .font(Font.system(size: fontSize))
+//                            .onTapGesture {
+//                                theme.removeEmoji(emoji)
+//                            }
+//                    }
+//                    .frame(height: height)
+                }
+            }.onAppear {
+                themeName = theme.name
             }
         }
     }

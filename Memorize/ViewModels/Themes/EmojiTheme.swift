@@ -99,4 +99,20 @@ class EmojiTheme: ObservableObject, Codable, Hashable, Identifiable {
     func setName(to name: String) {
         self.name = name
     }
+
+    func addEmojis(_ emojis: [String]) {
+        self.emojis += emojis
+    }
+
+    func removeEmoji(_ emoji: String) {
+        self.emojis = emojis.filter { $0 != emoji }
+    }
+
+    func incrementNumberOfPairs(by number: Int = 1) {
+        self.numberOfPairs += number
+    }
+
+    func decrementNumberOfPairs(by number: Int = 1) {
+        self.numberOfPairs -= number
+    }
 }

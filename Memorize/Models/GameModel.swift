@@ -8,12 +8,16 @@
 
 import Foundation
 
-struct GameModel<CardContent> where CardContent: Equatable {
+struct GameModel<CardContent: Hashable> {
     private(set) var cards: Array<Card>
     private(set) var theme: EmojiTheme
     private(set) var points: Int
     
-    struct Card: Identifiable {
+    struct Card: Hashable, Identifiable {
+        static func == (lhs: Card, rhs: Card) -> Bool {
+            lhs.id == rhs.id
+        }
+        
         var id: Int
         var isFaceUp: Bool = false {
             didSet {

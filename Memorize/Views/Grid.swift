@@ -8,12 +8,14 @@
 
 import SwiftUI
 
-struct Grid<Item, ItemView>: View where Item: Identifiable, ItemView: View {
-    var items: [Item]
-    var viewForItem: (Item) -> ItemView
+struct Grid<Item, ID, ItemView>: View where ID: Hashable, ItemView: View {
+    private var items: [Item]
+    private var id: KeyPath<Item, ID>
+    private var viewForItem: (Item) -> ItemView
     
-    init(items: [Item], viewForItem: @escaping (Item) -> ItemView) {
+    init(_ items: [Item], id: KeyPath<Item, ID>, viewForItem: @escaping (Item) -> ItemView) {
         self.items = items
+        self.id = id
         self.viewForItem = viewForItem
     }
     
@@ -24,14 +26,15 @@ struct Grid<Item, ItemView>: View where Item: Identifiable, ItemView: View {
     }
     
     func body(for layout: GridLayout) -> some View {
-        ForEach(items) { item in
+        ForEach(items, id: id) { item in
             self.body(for: item, in: layout)
         }
     }
     
     func body(for item: Item, in layout: GridLayout) -> some View {
-        viewForItem(item)
+        let index = items.firstIndex(where: { item[keyPath: id] == $0[keyPath: id] })
+        return viewForItem(item)
             .frame(width: layout.itemSize.width, height: layout.itemSize.height)
-            .position(layout.location(ofItemAt: items.firstIndex(of: item)!))
+            .position(layout.location(ofItemAt: index!))
     }
 }

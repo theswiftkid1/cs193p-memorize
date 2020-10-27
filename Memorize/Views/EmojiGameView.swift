@@ -38,7 +38,7 @@ struct EmojiGameView: View {
                     self.gameTime += 1
                 }
             
-            Grid(items: game.cards) { card in
+            Grid(game.cards, id: \.self) { card in
                 CardView(card: card, theme: game.model.theme).onTapGesture {
                     withAnimation(.easeInOut) {
                         self.game.choose(card: card)
