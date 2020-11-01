@@ -87,6 +87,15 @@
 			path = Games;
 			sourceTree = "<group>";
 		};
+		45BAE345254F57670086395E /* Theme Views */ = {
+			isa = PBXGroup;
+			children = (
+				CAD5036D254497C900E56B6E /* EmojiThemeChooser.swift */,
+				45383AFA254767E100BC34E5 /* EmojiThemeEditor.swift */,
+			);
+			path = "Theme Views";
+			sourceTree = "<group>";
+		};
 		CA20F655253E291F002755F9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,11 +111,10 @@
 		CA20F656253E293C002755F9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				45BAE345254F57670086395E /* Theme Views */,
 				CAFD5E2624D9FD5E0092A5A7 /* Cardify.swift */,
 				45B0E8552546121C004ED0EC /* EditableText.swift */,
 				CA2FCADA24B50BF7002B0403 /* EmojiGameView.swift */,
-				CAD5036D254497C900E56B6E /* EmojiThemeChooser.swift */,
-				45383AFA254767E100BC34E5 /* EmojiThemeEditor.swift */,
 				CAD2EBE824BFAACF002A1747 /* Grid.swift */,
 				CAD2EBEA24BFADFE002A1747 /* GridLayout.swift */,
 				CAFD5E1E24D9F6D60092A5A7 /* Pie.swift */,

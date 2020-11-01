@@ -3,13 +3,36 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "EmojiTheme.init(id:):EmojiTheme.swift">
+         contextName = "closure #1 in closure #5 in closure #2 in closure #1 in EmojiThemeEditor.body.getter:EmojiThemeEditor.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "theme">
+            </PersistentString>
+            <PersistentString
+               value = "theme.id">
+            </PersistentString>
+            <PersistentString
+               value = "theme.color">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Dictionary&lt;&gt;.asPropertyList.getter:EmojiThemeStore.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in EmojiThemeChooser.body.getter:EmojiThemeChooser.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in EmojiThemeStore.init(named:):EmojiThemeStore.swift">
       </ContextState>
       <ContextState
+         contextName = "EmojiThemeEditor.body.getter:EmojiThemeEditor.swift">
+      </ContextState>
+      <ContextState
          contextName = "Dictionary&lt;&gt;.init(fromPropertyList:):EmojiThemeStore.swift">
+      </ContextState>
+      <ContextState
+         contextName = "EmojiTheme.init(id:):EmojiTheme.swift">
       </ContextState>
       <ContextState
          contextName = "ThemeColor.init(from:):EmojiTheme.swift">
@@ -18,9 +41,6 @@
                value = "decoder.unkeyedContainer()">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "Dictionary&lt;&gt;.asPropertyList.getter:EmojiThemeStore.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

@@ -128,7 +128,12 @@ struct CardView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        let game = EmojiGame(theme: EmojiTheme())
+        let game = EmojiGame(theme: EmojiTheme(
+            name: "Untitled",
+            emojis: [],
+            color: .Solid(CodableColor(color: .red)),
+            numberOfPairs: 0
+        ))
         game.choose(card: game.cards[2])
         return EmojiGameView(game: game)
     }

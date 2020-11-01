@@ -20,7 +20,7 @@ class EmojiGame: ObservableObject {
 
     private static func createGameModel(theme: EmojiTheme) -> GameModel<String> {
         let themedEmojis = theme.emojis
-        print("Random theme \(theme.json?.utf8 ?? "nil")")
+//        print("Random theme \(theme.json?.utf8 ?? "nil")")
         return GameModel<String>(theme: theme) { index in
             return themedEmojis[index]
         }

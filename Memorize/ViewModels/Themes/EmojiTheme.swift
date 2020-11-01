@@ -8,45 +8,35 @@
 
 import SwiftUI
 
-class EmojiTheme: ObservableObject, Codable, Hashable, Identifiable {
-    var id: UUID
-    @Published var name: String
-    @Published var emojis: [String]
-    @Published var color: ThemeColor
-    @Published var numberOfPairs: Int
+class EmojiTheme: Codable, Hashable, Identifiable {
+    var id: UUID = UUID()
+    var name: String
+    var emojis: [String]
+    var color: ThemeColor
+    var numberOfPairs: Int
     
     // MARK: Init
 
-    init(id: UUID? = nil) {
-        self.id = id ?? UUID()
-        let userDefaultsKey = "EmojiTheme.\(self.id.uuidString)"
-        let json = UserDefaults.standard.data(forKey: userDefaultsKey)
-        if json != nil, let newEmojiTheme = try? JSONDecoder().decode(EmojiTheme.self, from: json!) {
-            self.name = newEmojiTheme.name
-            self.emojis = newEmojiTheme.emojis
-            self.color = newEmojiTheme.color
-            self.numberOfPairs = newEmojiTheme.numberOfPairs
-        } else {
-            self.name = "Untitled"
-            self.emojis = []
-            self.color = .Solid(CodableColor(color: .red))
-            self.numberOfPairs = 0
-        }
-    }
-    
     init(name: String,
          emojis: [String],
          color: ThemeColor,
          numberOfPairs: Int) {
-        self.id = UUID()
         self.name = name
         self.emojis = emojis
         self.color = color
         self.numberOfPairs = numberOfPairs
-        let userDefaultsKey = "EmojiTheme.\(self.id.uuidString)"
-        UserDefaults.standard.set(self.json, forKey: userDefaultsKey)
     }
     
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        id = try container.decode(UUID.self, forKey: .id)
+        name = try container.decode(String.self, forKey: .name)
+        emojis = try container.decode(Array<String>.self, forKey: .emojis)
+        color = try container.decode(ThemeColor.self, forKey: .color)
+        numberOfPairs = try container.decode(Int.self, forKey: .numberOfPairs)
+    }
+
     // MARK: Codable
     
     enum CodingKeys: CodingKey {
@@ -63,20 +53,9 @@ class EmojiTheme: ObservableObject, Codable, Hashable, Identifiable {
         try container.encode(numberOfPairs, forKey: .numberOfPairs)
     }
     
-    required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        id = try container.decode(UUID.self, forKey: .id)
-        name = try container.decode(String.self, forKey: .name)
-        emojis = try container.decode(Array<String>.self, forKey: .emojis)
-        color = try container.decode(ThemeColor.self, forKey: .color)
-        numberOfPairs = try container.decode(Int.self, forKey: .numberOfPairs)
-    }
-    
     var json: Data? {
         return try? JSONEncoder().encode(self)
     }
-
     
     // MARK: Identifiable
 
@@ -96,10 +75,6 @@ class EmojiTheme: ObservableObject, Codable, Hashable, Identifiable {
     
     // MARK: Actions
     
-    func setName(to name: String) {
-        self.name = name
-    }
-
     func addEmojis(_ emojis: [String]) {
         self.emojis += emojis
     }
@@ -114,5 +89,13 @@ class EmojiTheme: ObservableObject, Codable, Hashable, Identifiable {
 
     func decrementNumberOfPairs(by number: Int = 1) {
         self.numberOfPairs -= number
+    }
+
+    func selectColor(_ color: Color) {
+        self.color = .Solid(CodableColor.init(color: color))
+    }
+
+    func selectColor(_ gradient: Gradient) {
+        self.color = .Gradient(ThemeGradient.Rainbow)
     }
 }
