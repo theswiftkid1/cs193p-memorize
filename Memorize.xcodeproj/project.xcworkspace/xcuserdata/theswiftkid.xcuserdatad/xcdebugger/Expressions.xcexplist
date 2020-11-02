@@ -23,16 +23,40 @@
          contextName = "closure #2 in closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in EmojiThemeChooser.body.getter:EmojiThemeChooser.swift">
       </ContextState>
       <ContextState
-         contextName = "closure #1 in EmojiThemeStore.init(named:):EmojiThemeStore.swift">
+         contextName = "EmojiTheme.init(id:):EmojiTheme.swift">
+      </ContextState>
+      <ContextState
+         contextName = "EmojiThemeStore.themes.getter:EmojiThemeStore.swift">
       </ContextState>
       <ContextState
          contextName = "EmojiThemeEditor.body.getter:EmojiThemeEditor.swift">
       </ContextState>
       <ContextState
-         contextName = "Dictionary&lt;&gt;.init(fromPropertyList:):EmojiThemeStore.swift">
+         contextName = "closure #1 in EmojiThemeStore.init():EmojiThemeStore.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.themes">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "EmojiTheme.init(id:):EmojiTheme.swift">
+         contextName = "closure #1 in closure #1 in closure #2 in closure #2 in closure #1 in EmojiThemeEditor.body.getter:EmojiThemeEditor.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "emojisToAdd">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SelectableColorView.selected():EmojiThemeEditor.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "themeColor.color">
+            </PersistentString>
+            <PersistentString
+               value = "color">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "ThemeColor.init(from:):EmojiTheme.swift">
@@ -41,6 +65,12 @@
                value = "decoder.unkeyedContainer()">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Dictionary&lt;&gt;.init(fromPropertyList:):EmojiThemeStore.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in EmojiThemeStore.init(named:):EmojiThemeStore.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

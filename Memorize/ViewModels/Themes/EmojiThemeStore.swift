@@ -34,19 +34,21 @@ class EmojiThemeStore: ObservableObject {
            themes = savedThemes
         }
 
-        themesAutosave = $themes.sink { _ in
-            let json: Data = self.encodeThemes(self.themes)
+        themesAutosave = $themes.sink { newThemes in
+            let json: Data = self.encodeThemes(newThemes)
             UserDefaults.standard.set(json, forKey: self.ThemesData)
         }
     }
 
     func addUntitledTheme() {
-        themes.append(EmojiTheme(
-            name: "Untitled",
-            emojis: [],
-            color: .Solid(CodableColor(color: .red)),
-            numberOfPairs: 0
-        ))
+        withAnimation {
+            themes.append(EmojiTheme(
+                name: "Untitled",
+                emojis: [],
+                color: .Solid(CodableColor(color: .red)),
+                numberOfPairs: 0
+            ))
+        }
     }
 
     func addTheme(_ theme: EmojiTheme) {

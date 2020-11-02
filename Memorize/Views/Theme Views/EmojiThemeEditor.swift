@@ -7,13 +7,17 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct EmojiThemeEditor: View {
-    @State var theme: EmojiTheme
+    @Binding var theme: EmojiTheme
     @Binding var isShowing: Bool
-    @State private var themeName: String = ""
     @State private var emojisToAdd: String = ""
-    
+    @State private var themeName: String = ""
+    @State private var themeColor: ThemeColor = ThemeColor.Solid(CodableColor(color: .red))
+    @State private var themeEmojis: [String] = []
+    @State private var themeNbOfPairs: Int = 0
+
     let fontSize: CGFloat = 40
     var height: CGFloat {
         CGFloat((theme.emojis.count - 1) / 6 * 70 + 70)
@@ -22,10 +26,17 @@ struct EmojiThemeEditor: View {
     var body: some View {
         VStack(spacing: 0) {
             ZStack {
-                Text(theme.name)
-                    .font(.headline)
-                    .padding()
                 HStack {
+                    Button {
+                        isShowing = false
+                    } label: {
+                        Text("Cancel")
+                    }
+                    .padding()
+                    Spacer()
+                    Text(theme.name)
+                        .font(.headline)
+                        .padding()
                     Spacer()
                     Button {
                         isShowing = false
@@ -40,14 +51,14 @@ struct EmojiThemeEditor: View {
             
             Form {
                 Section {
-                    TextField("Theme Name", text: $theme.name)
+                    TextField("Theme Name", text: $themeName)
                 }
                 
                 Section(header: Text("Add Emojis")) {
                     HStack {
                         TextField("Emoji", text: $emojisToAdd)
                         Button {
-                            theme.addEmojis(Array(arrayLiteral: emojisToAdd))
+                            themeEmojis.append(emojisToAdd)
                         } label: {
                             Text("Add")
                                 .foregroundColor(.blue)
@@ -56,11 +67,11 @@ struct EmojiThemeEditor: View {
                 }
                 
                 Section(header: Text("Emojis")) {
-                    Grid(theme.emojis, id: \.self) { emoji in
+                    Grid(themeEmojis, id: \.self) { emoji in
                         Text(emoji)
                             .font(Font.system(size: fontSize))
                             .onTapGesture {
-                                theme.removeEmoji(emoji)
+                                themeEmojis.removeAll { $0 == emoji }
                             }
                     }
                     .frame(height: height)
@@ -68,45 +79,42 @@ struct EmojiThemeEditor: View {
                 
                 Section(header: Text("Card Count")) {
                     HStack {
-                        Text(String(theme.numberOfPairs) + " Pairs")
                         Stepper(
-                            onIncrement: {
-                                theme.incrementNumberOfPairs()
-                            },
-                            onDecrement: {
-                                theme.decrementNumberOfPairs()
-                            },
-                            label: {
-                                EmptyView()
-                            }
+                            String(themeNbOfPairs) + " Pairs",
+                            value: $themeNbOfPairs,
+                            in: 1...8,
+                            step: 1
                         )
                     }
                 }
                 
                 Section(header: Text("Color")) {
                     Grid(selectableColors, id: \.self) { selectableColor in
-                        SelectableColorView(theme: theme, color: selectableColor)
+                        SelectableColorView(color: selectableColor, selectedColor: $themeColor)
                             .onTapGesture {
-                                theme.selectColor(selectableColor)
+                                themeColor = ThemeColor.Solid(CodableColor(color: selectableColor))
                             }
                     }
                     .frame(height: height)
                 }
             }.onAppear {
                 themeName = theme.name
+                themeEmojis = theme.emojis
+                themeColor = theme.color
+                themeNbOfPairs = theme.numberOfPairs
             }
         }
     }
 }
 
 struct SelectableColorView: View {
-    var theme: EmojiTheme
     var color: Color
+    @Binding var selectedColor: ThemeColor
 
     @ViewBuilder
     private func selected() -> some View {
-        switch theme.color {
-        case .Solid(let themeColor) where themeColor.color == color:
+        switch selectedColor {
+        case .Solid(let themeColor) where themeColor.color.description == color.description:
             RoundedRectangle(cornerRadius: 10)
                 .strokeBorder(lineWidth: 3)
                 .foregroundColor(.black)
@@ -134,7 +142,7 @@ struct EmojiThemeEditor_Previews: PreviewProvider {
             color: .Solid(CodableColor(color: .blue)),
             numberOfPairs: 4
         )
-
-        EmojiThemeEditor(theme: theme, isShowing: Binding.constant(true))
+        
+        EmojiThemeEditor(theme: Binding.constant(theme), isShowing: Binding.constant(true))
     }
 }

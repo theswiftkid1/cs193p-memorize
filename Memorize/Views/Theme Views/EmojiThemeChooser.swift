@@ -51,8 +51,7 @@ struct EmojiThemeChooser: View {
 }
 
 struct ThemeRowView: View {
-    var theme: EmojiTheme
-
+    @State var theme: EmojiTheme
     @Binding var showThemeEditor: Bool
     @Binding var editMode: EditMode
 
@@ -65,7 +64,7 @@ struct ThemeRowView: View {
                         showThemeEditor = true
                     }
                     .popover(isPresented: $showThemeEditor) {
-                        EmojiThemeEditor(theme: theme, isShowing: $showThemeEditor)
+                        EmojiThemeEditor(theme: $theme, isShowing: $showThemeEditor)
                     }
             } else {
                 Text(theme.name)
