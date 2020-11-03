@@ -14,7 +14,25 @@ class EmojiTheme: Codable, Hashable, Identifiable {
     var emojis: [String]
     var color: ThemeColor
     var numberOfPairs: Int
+
+    static let defaultTheme = EmojiTheme(
+        name: "Untitled",
+        emojis: [],
+        color: .Solid(CodableColor(color: .gray)),
+        numberOfPairs: 0
+    )
     
+    static let availableThemeColors: [Color] = [
+        .red,
+        .blue,
+        .green,
+        .gray,
+        .purple,
+        .pink,
+        .orange,
+        .black
+    ]
+
     // MARK: Init
 
     init(name: String,

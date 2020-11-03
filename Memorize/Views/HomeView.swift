@@ -8,11 +8,12 @@
 
 import SwiftUI
 
-struct EmojiThemeChooser: View {
+struct HomeView: View {
     @EnvironmentObject private var store: EmojiThemeStore
-
+    
     @State private var editMode: EditMode = .inactive
     @State private var showThemeEditor: Bool = false
+    @State private var themeToEdit: EmojiTheme = EmojiTheme.defaultTheme
     
     var body: some View {
         NavigationView {
@@ -21,10 +22,10 @@ struct EmojiThemeChooser: View {
                     NavigationLink(
                         destination:
                             EmojiGameView(game: EmojiGame(theme: theme))
-                                .navigationBarTitle(theme.name + "!")
                     ) {
                         ThemeRowView(
                             theme: theme,
+                            themeToEdit: $themeToEdit,
                             showThemeEditor: $showThemeEditor,
                             editMode: $editMode
                         )
@@ -36,7 +37,7 @@ struct EmojiThemeChooser: View {
                     }
                 }
             }
-            .navigationBarTitle(Text("Themes Store"))
+            .navigationBarTitle(Text("Home"))
             .navigationBarItems(
                 leading: Button {
                     store.addUntitledTheme()
@@ -46,36 +47,41 @@ struct EmojiThemeChooser: View {
                 trailing: EditButton()
             )
             .environment(\.editMode, $editMode)
+            .popover(isPresented: $showThemeEditor) {
+                EmojiThemeEditor(theme: $themeToEdit, isShowing: $showThemeEditor)
+            }
         }
     }
 }
 
 struct ThemeRowView: View {
-    @State var theme: EmojiTheme
+    var theme: EmojiTheme
+    @Binding var themeToEdit: EmojiTheme
     @Binding var showThemeEditor: Bool
     @Binding var editMode: EditMode
-
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            if (editMode.isEditing) {
+        if (editMode.isEditing) {
+            VStack(alignment: .leading, spacing: 10) {
                 Text("Edit " + theme.name)
                     .foregroundColor(.blue)
-                    .onTapGesture {
-                        showThemeEditor = true
-                    }
-                    .popover(isPresented: $showThemeEditor) {
-                        EmojiThemeEditor(theme: $theme, isShowing: $showThemeEditor)
-                    }
-            } else {
-                Text(theme.name)
+                Text(theme.emojis.joined())
             }
-            Text(theme.emojis.joined())
+            .onTapGesture {
+                showThemeEditor = true
+                themeToEdit = theme
+            }
+        } else {
+            VStack(alignment: .leading, spacing: 10) {
+                Text(theme.name)
+                Text(theme.emojis.joined())
+            }
         }
     }
 }
 
 struct EmojiThemeChooser_Previews: PreviewProvider {
     static var previews: some View {
-        EmojiThemeChooser()
+        HomeView()
     }
 }

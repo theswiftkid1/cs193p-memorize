@@ -59,18 +59,9 @@ public struct CodableColor: Codable, Hashable {
 
 // MARK: - ThemeColor
 
-let selectableColors: [Color] = [
-    .red,
-    .blue,
-    .green,
-    .gray,
-    .purple,
-    .black
-]
-
 enum ThemeColor {
     case Solid(CodableColor)
-    case Gradient(ThemeGradient)
+    case Gradient(ThemeGradient)    
 }
 
 extension ThemeColor: Codable, Hashable {

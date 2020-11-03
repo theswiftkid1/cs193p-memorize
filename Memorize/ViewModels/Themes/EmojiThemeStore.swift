@@ -42,12 +42,7 @@ class EmojiThemeStore: ObservableObject {
 
     func addUntitledTheme() {
         withAnimation {
-            themes.append(EmojiTheme(
-                name: "Untitled",
-                emojis: [],
-                color: .Solid(CodableColor(color: .red)),
-                numberOfPairs: 0
-            ))
+            themes.append(EmojiTheme.defaultTheme)
         }
     }
 

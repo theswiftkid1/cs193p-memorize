@@ -10,7 +10,7 @@ import SwiftUI
 import Foundation
 
 class EmojiGame: ObservableObject {
-    @State private var theme: EmojiTheme
+    private let theme: EmojiTheme
     @Published private(set) var model: GameModel<String>
 
     init(theme: EmojiTheme) {
@@ -19,10 +19,8 @@ class EmojiGame: ObservableObject {
     }
 
     private static func createGameModel(theme: EmojiTheme) -> GameModel<String> {
-        let themedEmojis = theme.emojis
-//        print("Random theme \(theme.json?.utf8 ?? "nil")")
-        return GameModel<String>(theme: theme) { index in
-            return themedEmojis[index]
+        GameModel<String>(theme: theme) { index in
+            return theme.emojis[index]
         }
     }
 

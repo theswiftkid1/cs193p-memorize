@@ -17,7 +17,7 @@ struct EmojiThemeEditor: View {
     @State private var themeColor: ThemeColor = ThemeColor.Solid(CodableColor(color: .red))
     @State private var themeEmojis: [String] = []
     @State private var themeNbOfPairs: Int = 0
-
+    
     let fontSize: CGFloat = 40
     var height: CGFloat {
         CGFloat((theme.emojis.count - 1) / 6 * 70 + 70)
@@ -89,13 +89,7 @@ struct EmojiThemeEditor: View {
                 }
                 
                 Section(header: Text("Color")) {
-                    Grid(selectableColors, id: \.self) { selectableColor in
-                        SelectableColorView(color: selectableColor, selectedColor: $themeColor)
-                            .onTapGesture {
-                                themeColor = ThemeColor.Solid(CodableColor(color: selectableColor))
-                            }
-                    }
-                    .frame(height: height)
+                    SelectableThemeColorGrid(selectedThemeColor: colorOf(themeColor))
                 }
             }.onAppear {
                 themeName = theme.name
@@ -105,32 +99,35 @@ struct EmojiThemeEditor: View {
             }
         }
     }
-}
-
-struct SelectableColorView: View {
-    var color: Color
-    @Binding var selectedColor: ThemeColor
-
-    @ViewBuilder
-    private func selected() -> some View {
-        switch selectedColor {
-        case .Solid(let themeColor) where themeColor.color.description == color.description:
-            RoundedRectangle(cornerRadius: 10)
-                .strokeBorder(lineWidth: 3)
-                .foregroundColor(.black)
-        case _:
-            EmptyView()
+    
+    func colorOf(_ theme: ThemeColor) -> Color {
+        switch theme {
+        case .Solid(let codableColor):
+            return codableColor.color
+        default:
+            return .black
         }
     }
+}
+
+struct SelectableThemeColorGrid: View {
+    @State var selectedThemeColor: Color
     
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(color)
-            
-            selected()
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4)) {
+            ForEach(EmojiTheme.availableThemeColors, id:\.self) { color in
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(color)
+                    .aspectRatio(1, contentMode: .fit)
+                    .onTapGesture {
+                        selectedThemeColor = color
+                    }
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.black, lineWidth: selectedThemeColor == color ? 3 : 0)
+                    )
+            }
         }
-        .padding()
     }
 }
 

@@ -65,7 +65,7 @@ struct MemorizeApp: App {
 
     var body: some Scene {
         WindowGroup {
-            EmojiThemeChooser().environmentObject(store)
+            HomeView().environmentObject(store)
         }
     }
 }
