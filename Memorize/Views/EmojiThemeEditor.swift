@@ -10,13 +10,18 @@ import SwiftUI
 import Foundation
 
 struct EmojiThemeEditor: View {
-    @Binding var theme: EmojiTheme
+    private(set) var theme: EmojiTheme
+
+    @EnvironmentObject private var store: EmojiThemeStore
+
     @Binding var isShowing: Bool
+
+    @State private var name: String = ""
+    @State private var numberOfPairs: Int = 0
+    @State private var emojis: Set<String> = .init()
+    @State private var color: Color = .black
+    @State private var selectableColors = EmojiTheme.availableThemeColors
     @State private var emojisToAdd: String = ""
-    @State private var themeName: String = ""
-    @State private var themeColor: ThemeColor = ThemeColor.Solid(CodableColor(color: .red))
-    @State private var themeEmojis: [String] = []
-    @State private var themeNbOfPairs: Int = 0
     
     let fontSize: CGFloat = 40
     var height: CGFloat {
@@ -40,6 +45,11 @@ struct EmojiThemeEditor: View {
                     Spacer()
                     Button {
                         isShowing = false
+                        theme.name = name
+                        theme.color = ThemeColor.Solid(CodableColor(color: color))
+                        theme.emojis = Array(emojis)
+                        theme.numberOfPairs = numberOfPairs
+                        store.updateTheme(theme)
                     } label: {
                         Text("Done")
                     }
@@ -51,14 +61,19 @@ struct EmojiThemeEditor: View {
             
             Form {
                 Section {
-                    TextField("Theme Name", text: $themeName)
+                    TextField("Theme Name", text: $name)
                 }
                 
                 Section(header: Text("Add Emojis")) {
                     HStack {
                         TextField("Emoji", text: $emojisToAdd)
                         Button {
-                            themeEmojis.append(emojisToAdd)
+                            withAnimation {
+                                
+                                emojisToAdd.forEach { emoji in
+                                    self.emojis.insert(String(emoji))
+                                }
+                            }
                         } label: {
                             Text("Add")
                                 .foregroundColor(.blue)
@@ -67,11 +82,13 @@ struct EmojiThemeEditor: View {
                 }
                 
                 Section(header: Text("Emojis")) {
-                    Grid(themeEmojis, id: \.self) { emoji in
+                    Grid(Array(emojis), id: \.self) { emoji in
                         Text(emoji)
                             .font(Font.system(size: fontSize))
                             .onTapGesture {
-                                themeEmojis.removeAll { $0 == emoji }
+                                withAnimation {
+                                    emojis = emojis.filter { $0 == emoji }
+                                }
                             }
                     }
                     .frame(height: height)
@@ -80,8 +97,8 @@ struct EmojiThemeEditor: View {
                 Section(header: Text("Card Count")) {
                     HStack {
                         Stepper(
-                            String(themeNbOfPairs) + " Pairs",
-                            value: $themeNbOfPairs,
+                            "\(numberOfPairs) Pairs",
+                            value: $numberOfPairs,
                             in: 1...8,
                             step: 1
                         )
@@ -89,14 +106,16 @@ struct EmojiThemeEditor: View {
                 }
                 
                 Section(header: Text("Color")) {
-                    SelectableThemeColorGrid(selectedThemeColor: colorOf(themeColor))
+                    SelectableThemeColorGrid(selectableColors: selectableColors, selectedThemeColor: color)
                 }
-            }.onAppear {
-                themeName = theme.name
-                themeEmojis = theme.emojis
-                themeColor = theme.color
-                themeNbOfPairs = theme.numberOfPairs
             }
+        }
+        .onAppear {
+            name = theme.name
+            numberOfPairs = theme.numberOfPairs
+            emojis = Set(theme.emojis)
+            // /!\ Problem here because of encoding/decoding with UIColor which gives a different UIExtendedSRGBColorSpace instead of a wanted simple color
+            color = colorOf(theme.color)
         }
     }
     
@@ -111,20 +130,28 @@ struct EmojiThemeEditor: View {
 }
 
 struct SelectableThemeColorGrid: View {
+    private(set) var selectableColors: [Color]
     @State var selectedThemeColor: Color
     
+    private let cornerRadius = CGFloat(10)
+
     var body: some View {
         LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4)) {
-            ForEach(EmojiTheme.availableThemeColors, id:\.self) { color in
-                RoundedRectangle(cornerRadius: 10)
+            ForEach(selectableColors, id:\.self) { color in
+                RoundedRectangle(cornerRadius: cornerRadius)
                     .fill(color)
                     .aspectRatio(1, contentMode: .fit)
                     .onTapGesture {
-                        selectedThemeColor = color
+                        withAnimation(.linear(duration: 0.1)) {
+                            selectedThemeColor = color
+                        }
                     }
                     .overlay(
-                        RoundedRectangle(cornerRadius: 10)
+                        RoundedRectangle(cornerRadius: cornerRadius)
                             .stroke(Color.black, lineWidth: selectedThemeColor == color ? 3 : 0)
+                            .onAppear {
+                                print("Theme Color <\(selectedThemeColor)> | Color <\(Color(UIColor(color)))> | Equals <\(selectedThemeColor == Color(UIColor(color)))>")
+                            }
                     )
             }
         }
@@ -140,6 +167,6 @@ struct EmojiThemeEditor_Previews: PreviewProvider {
             numberOfPairs: 4
         )
         
-        EmojiThemeEditor(theme: Binding.constant(theme), isShowing: Binding.constant(true))
+        EmojiThemeEditor(theme: theme, isShowing: Binding.constant(true))
     }
 }

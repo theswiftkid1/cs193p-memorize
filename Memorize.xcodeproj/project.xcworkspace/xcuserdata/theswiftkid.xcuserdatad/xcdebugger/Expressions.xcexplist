@@ -29,13 +29,43 @@
          contextName = "EmojiThemeStore.themes.getter:EmojiThemeStore.swift">
       </ContextState>
       <ContextState
+         contextName = "EmojiThemeEditor.colorOf(_:):EmojiThemeEditor.swift">
+      </ContextState>
+      <ContextState
          contextName = "EmojiThemeEditor.body.getter:EmojiThemeEditor.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in EmojiThemeEditor.body.getter:EmojiThemeEditor.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.colorOf(theme.color)">
+            </PersistentString>
+            <PersistentString
+               value = "theme.color">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CodableColor.init(from:):ThemeColor.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "uiColor.cgColor">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "closure #1 in EmojiThemeStore.init():EmojiThemeStore.swift">
          <PersistentStrings>
             <PersistentString
                value = "self.themes">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SelectableThemeColorGrid.body.getter:EmojiThemeEditor.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selectedThemeColor">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -63,6 +93,14 @@
          <PersistentStrings>
             <PersistentString
                value = "decoder.unkeyedContainer()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #5 in closure #2 in closure #1 in EmojiThemeEditor.body.getter:EmojiThemeEditor.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "color">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

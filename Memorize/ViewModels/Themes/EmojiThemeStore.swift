@@ -55,6 +55,15 @@ class EmojiThemeStore: ObservableObject {
             addTheme(theme)
         }
     }
+    
+    func updateTheme(_ theme: EmojiTheme) {
+        if let themeIndex = themes.firstIndex(of: theme) {
+            themes[themeIndex].name = theme.name
+            themes[themeIndex].color = theme.color
+            themes[themeIndex].emojis = theme.emojis
+            themes[themeIndex].numberOfPairs = theme.numberOfPairs
+        }
+    }
 
     func removeTheme(_ theme: EmojiTheme) {
         if let themeIndex = themes.firstIndex(of: theme) {

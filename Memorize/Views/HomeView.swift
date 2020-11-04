@@ -22,6 +22,7 @@ struct HomeView: View {
                     NavigationLink(
                         destination:
                             EmojiGameView(game: EmojiGame(theme: theme))
+                            .navigationBarTitle(Text(theme.name))
                     ) {
                         ThemeRowView(
                             theme: theme,
@@ -37,7 +38,7 @@ struct HomeView: View {
                     }
                 }
             }
-            .navigationBarTitle(Text("Home"))
+            .navigationBarTitle(Text("Memorize"))
             .navigationBarItems(
                 leading: Button {
                     store.addUntitledTheme()
@@ -48,7 +49,8 @@ struct HomeView: View {
             )
             .environment(\.editMode, $editMode)
             .popover(isPresented: $showThemeEditor) {
-                EmojiThemeEditor(theme: $themeToEdit, isShowing: $showThemeEditor)
+                EmojiThemeEditor(theme: themeToEdit, isShowing: $showThemeEditor)
+                    .environmentObject(store)
             }
         }
     }
