@@ -10,7 +10,7 @@ import SwiftUI
 import Foundation
 
 struct EmojiThemeEditor: View {
-    private(set) var theme: EmojiTheme
+    @State private(set) var theme: EmojiTheme
 
     @EnvironmentObject private var store: EmojiThemeStore
 
@@ -45,6 +45,7 @@ struct EmojiThemeEditor: View {
                     Spacer()
                     Button {
                         isShowing = false
+                        print("Saving name \(name)")
                         theme.name = name
                         theme.color = ThemeColor.Solid(CodableColor(color: color))
                         theme.emojis = Array(emojis)
@@ -149,9 +150,9 @@ struct SelectableThemeColorGrid: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: cornerRadius)
                             .stroke(Color.black, lineWidth: selectedThemeColor == color ? 3 : 0)
-                            .onAppear {
-                                print("Theme Color <\(selectedThemeColor)> | Color <\(Color(UIColor(color)))> | Equals <\(selectedThemeColor == Color(UIColor(color)))>")
-                            }
+//                            .onAppear {
+//                                print("Theme Color <\(selectedThemeColor)> | Color <\(Color(UIColor(color)))> | Equals <\(selectedThemeColor == Color(UIColor(color)))>")
+//                            }
                     )
             }
         }

@@ -10,64 +10,45 @@ import SwiftUI
 import Combine
 
 class EmojiThemeStore: ObservableObject {
-    @Published var themes = [EmojiTheme]()
+    @Published var themesManager: EmojiThemesManager
 
     private var themesAutosave: AnyCancellable?
     private let ThemesData = "Memorize.Themes"
     
-    func encodeThemes<T: Encodable>(_ themes: T) -> Data {
-        var json : Data
-        do {
-            let encoder = JSONEncoder()
-            json = try encoder.encode(themes)
-        } catch {
-            fatalError("Couldn't encode the list of themes as \(T.self):\n\(error)")
-        }
-        return json
-    }
-
     init() {
-        let json =  UserDefaults.standard.data(forKey: ThemesData)
-        if json != nil,
-           let savedThemes = try? JSONDecoder().decode([EmojiTheme].self, from: json!) {
-            // replace self from JSON input
-           themes = savedThemes
-        }
+        themesManager = EmojiThemesManager(json: UserDefaults.standard.data(forKey: ThemesData)) ?? EmojiThemesManager()
 
-        themesAutosave = $themes.sink { newThemes in
-            let json: Data = self.encodeThemes(newThemes)
+        themesAutosave = $themesManager.sink { manager in
+            let json: Data = manager.encodeThemes(manager.themes)
             UserDefaults.standard.set(json, forKey: self.ThemesData)
         }
     }
-
+    
+    // MARK: Variables
+    
+    var themes: [EmojiTheme] {
+        themesManager.themes
+    }
+    
+    // MARK: Actions
+    
     func addUntitledTheme() {
-        withAnimation {
-            themes.append(EmojiTheme.defaultTheme)
-        }
+        themesManager.addUntitledTheme()
     }
 
     func addTheme(_ theme: EmojiTheme) {
-        themes.append(theme)
+        themesManager.addTheme(theme)
     }
 
-    func addThemes(_ themes: [EmojiTheme]) {
-        for theme in themes {
-            addTheme(theme)
-        }
+    func addThemes(_ newThemes: [EmojiTheme]) {
+        themesManager.addThemes(newThemes)
     }
     
     func updateTheme(_ theme: EmojiTheme) {
-        if let themeIndex = themes.firstIndex(of: theme) {
-            themes[themeIndex].name = theme.name
-            themes[themeIndex].color = theme.color
-            themes[themeIndex].emojis = theme.emojis
-            themes[themeIndex].numberOfPairs = theme.numberOfPairs
-        }
+        themesManager.updateTheme(theme)
     }
 
     func removeTheme(_ theme: EmojiTheme) {
-        if let themeIndex = themes.firstIndex(of: theme) {
-            themes.remove(at: themeIndex)
-        }
+        themesManager.removeTheme(theme)
     }
 }

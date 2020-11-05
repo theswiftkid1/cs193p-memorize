@@ -58,7 +58,7 @@ struct MemorizeApp: App {
     ]
 
     init() {
-        if (store.themes.isEmpty) {
+        if (store.themesManager.themes.isEmpty) {
             store.addThemes(themes)
         }
     }

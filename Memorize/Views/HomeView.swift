@@ -13,12 +13,12 @@ struct HomeView: View {
     
     @State private var editMode: EditMode = .inactive
     @State private var showThemeEditor: Bool = false
-    @State private var themeToEdit: EmojiTheme = EmojiTheme.defaultTheme
+    @State private var themeToEdit: EmojiTheme = .defaultTheme
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(store.themes) { theme in
+                ForEach(store.themesManager.themes) { theme in
                     NavigationLink(
                         destination:
                             EmojiGameView(game: EmojiGame(theme: theme))
@@ -33,7 +33,7 @@ struct HomeView: View {
                     }
                 }
                 .onDelete { indexSet in
-                    indexSet.map { store.themes[$0] }.forEach { theme in
+                    indexSet.map { store.themesManager.themes[$0] }.forEach { theme in
                         store.removeTheme(theme)
                     }
                 }
