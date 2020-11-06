@@ -13,7 +13,6 @@ struct HomeView: View {
     
     @State private var editMode: EditMode = .inactive
     @State private var showThemeEditor: Bool = false
-    @State private var themeToEdit: EmojiTheme = .defaultTheme
     
     var body: some View {
         NavigationView {
@@ -26,10 +25,9 @@ struct HomeView: View {
                     ) {
                         ThemeRowView(
                             theme: theme,
-                            themeToEdit: $themeToEdit,
-                            showThemeEditor: $showThemeEditor,
                             editMode: $editMode
                         )
+                        .environmentObject(store)
                     }
                 }
                 .onDelete { indexSet in
@@ -48,36 +46,6 @@ struct HomeView: View {
                 trailing: EditButton()
             )
             .environment(\.editMode, $editMode)
-            .popover(isPresented: $showThemeEditor) {
-                EmojiThemeEditor(theme: themeToEdit, isShowing: $showThemeEditor)
-                    .environmentObject(store)
-            }
-        }
-    }
-}
-
-struct ThemeRowView: View {
-    var theme: EmojiTheme
-    @Binding var themeToEdit: EmojiTheme
-    @Binding var showThemeEditor: Bool
-    @Binding var editMode: EditMode
-    
-    var body: some View {
-        if (editMode.isEditing) {
-            VStack(alignment: .leading, spacing: 10) {
-                Text("Edit " + theme.name)
-                    .foregroundColor(.blue)
-                Text(theme.emojis.joined())
-            }
-            .onTapGesture {
-                showThemeEditor = true
-                themeToEdit = theme
-            }
-        } else {
-            VStack(alignment: .leading, spacing: 10) {
-                Text(theme.name)
-                Text(theme.emojis.joined())
-            }
         }
     }
 }

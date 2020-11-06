@@ -44,8 +44,20 @@ class EmojiThemeStore: ObservableObject {
         themesManager.addThemes(newThemes)
     }
     
-    func updateTheme(_ theme: EmojiTheme) {
-        themesManager.updateTheme(theme)
+    func findTheme(_ theme: EmojiTheme) -> EmojiTheme? {
+        themesManager.findTheme(theme)
+    }
+
+    func updateTheme(theme: EmojiTheme,
+                     name: String,
+                     color: ThemeColor,
+                     emojis: [String],
+                     numberOfPairs: Int) {
+        themesManager.updateTheme(theme: theme,
+                                  name: name,
+                                  color: color,
+                                  emojis: emojis,
+                                  numberOfPairs: numberOfPairs)
     }
 
     func removeTheme(_ theme: EmojiTheme) {

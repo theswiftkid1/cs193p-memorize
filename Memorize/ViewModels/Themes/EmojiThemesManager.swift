@@ -43,12 +43,23 @@ struct EmojiThemesManager {
         }
     }
     
-    mutating func updateTheme(_ theme: EmojiTheme) {
+    func findTheme(_ theme: EmojiTheme) -> EmojiTheme? {
         if let themeIndex = themes.firstIndex(of: theme) {
-            themes[themeIndex].name = theme.name
-            themes[themeIndex].color = theme.color
-            themes[themeIndex].emojis = theme.emojis
-            themes[themeIndex].numberOfPairs = theme.numberOfPairs
+            return themes[themeIndex]
+        }
+        return nil
+    }
+    
+    mutating func updateTheme(theme: EmojiTheme,
+                              name: String,
+                              color: ThemeColor,
+                              emojis: [String],
+                              numberOfPairs: Int) {
+        if let themeIndex = themes.firstIndex(of: theme) {
+            themes[themeIndex].name = name
+            themes[themeIndex].color = color
+            themes[themeIndex].emojis = emojis
+            themes[themeIndex].numberOfPairs = numberOfPairs
         }
     }
 

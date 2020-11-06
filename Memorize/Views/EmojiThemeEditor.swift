@@ -10,9 +10,9 @@ import SwiftUI
 import Foundation
 
 struct EmojiThemeEditor: View {
-    @State private(set) var theme: EmojiTheme
-
     @EnvironmentObject private var store: EmojiThemeStore
+
+    private(set) var theme: EmojiTheme
 
     @Binding var isShowing: Bool
 
@@ -22,7 +22,7 @@ struct EmojiThemeEditor: View {
     @State private var color: Color = .black
     @State private var selectableColors = EmojiTheme.availableThemeColors
     @State private var emojisToAdd: String = ""
-    
+
     let fontSize: CGFloat = 40
     var height: CGFloat {
         CGFloat((theme.emojis.count - 1) / 6 * 70 + 70)
@@ -39,18 +39,19 @@ struct EmojiThemeEditor: View {
                     }
                     .padding()
                     Spacer()
-                    Text(theme.name)
+                    Text(name)
                         .font(.headline)
                         .padding()
                     Spacer()
                     Button {
                         isShowing = false
-                        print("Saving name \(name)")
-                        theme.name = name
-                        theme.color = ThemeColor.Solid(CodableColor(color: color))
-                        theme.emojis = Array(emojis)
-                        theme.numberOfPairs = numberOfPairs
-                        store.updateTheme(theme)
+                        store.updateTheme(
+                            theme: theme,
+                            name: name,
+                            color: ThemeColor.Solid(CodableColor(color: color)),
+                            emojis: Array(emojis),
+                            numberOfPairs: numberOfPairs
+                        )
                     } label: {
                         Text("Done")
                     }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		453310DF2556025500578E45 /* ThemeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453310DE2556025500578E45 /* ThemeRowView.swift */; };
+		453310E3255603EF00578E45 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453310E2255603EF00578E45 /* CardView.swift */; };
 		45383AFB254767E100BC34E5 /* EmojiThemeEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45383AFA254767E100BC34E5 /* EmojiThemeEditor.swift */; };
 		456627B82554AF05009ECDC7 /* EmojiTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456627B72554AF05009ECDC7 /* EmojiTheme.swift */; };
 		45B0E8562546121C004ED0EC /* EditableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0E8552546121C004ED0EC /* EditableText.swift */; };
@@ -33,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		453310DE2556025500578E45 /* ThemeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeRowView.swift; sourceTree = "<group>"; };
+		453310E2255603EF00578E45 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		45383AFA254767E100BC34E5 /* EmojiThemeEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiThemeEditor.swift; sourceTree = "<group>"; };
 		456627B72554AF05009ECDC7 /* EmojiTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTheme.swift; sourceTree = "<group>"; };
 		45B0E8552546121C004ED0EC /* EditableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableText.swift; sourceTree = "<group>"; };
@@ -105,14 +109,16 @@
 		CA20F656253E293C002755F9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CAD5036D254497C900E56B6E /* HomeView.swift */,
-				45383AFA254767E100BC34E5 /* EmojiThemeEditor.swift */,
 				CAFD5E2624D9FD5E0092A5A7 /* Cardify.swift */,
+				453310E2255603EF00578E45 /* CardView.swift */,
 				45B0E8552546121C004ED0EC /* EditableText.swift */,
 				CA2FCADA24B50BF7002B0403 /* EmojiGameView.swift */,
+				45383AFA254767E100BC34E5 /* EmojiThemeEditor.swift */,
 				CAD2EBE824BFAACF002A1747 /* Grid.swift */,
 				CAD2EBEA24BFADFE002A1747 /* GridLayout.swift */,
+				CAD5036D254497C900E56B6E /* HomeView.swift */,
 				CAFD5E1E24D9F6D60092A5A7 /* Pie.swift */,
+				453310DE2556025500578E45 /* ThemeRowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -259,11 +265,13 @@
 				CAFD5E2724D9FD5E0092A5A7 /* Cardify.swift in Sources */,
 				CAFD5E2124D9FCAD0092A5A7 /* View+Cardify.swift in Sources */,
 				45B0E85C25461496004ED0EC /* ThemeColor.swift in Sources */,
+				453310DF2556025500578E45 /* ThemeRowView.swift in Sources */,
 				CA2FCAEB24B50C4C002B0403 /* GameModel.swift in Sources */,
 				45B0E8562546121C004ED0EC /* EditableText.swift in Sources */,
 				CA414D87253E382A00B54171 /* Data+utf8.swift in Sources */,
 				CA650A0524C0EFE3002FFBF7 /* Array+Identifiable.swift in Sources */,
 				CAD2EBEB24BFADFE002A1747 /* GridLayout.swift in Sources */,
+				453310E3255603EF00578E45 /* CardView.swift in Sources */,
 				CAD2EBE924BFAACF002A1747 /* Grid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
