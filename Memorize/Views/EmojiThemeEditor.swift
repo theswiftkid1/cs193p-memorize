@@ -11,18 +11,18 @@ import Foundation
 
 struct EmojiThemeEditor: View {
     @EnvironmentObject private var store: EmojiThemeStore
-
+    
     private(set) var theme: EmojiTheme
-
+    
     @Binding var isShowing: Bool
-
+    
     @State private var name: String = ""
     @State private var numberOfPairs: Int = 0
-    @State private var emojis: Set<String> = .init()
+    @State private var emojis: Set<String> = ["😁"]
     @State private var color: Color = .black
     @State private var selectableColors = EmojiTheme.availableThemeColors
     @State private var emojisToAdd: String = ""
-
+    
     let fontSize: CGFloat = 40
     var height: CGFloat {
         CGFloat((theme.emojis.count - 1) / 6 * 70 + 70)
@@ -71,10 +71,11 @@ struct EmojiThemeEditor: View {
                         TextField("Emoji", text: $emojisToAdd)
                         Button {
                             withAnimation {
-                                
+                                // TODO: should check if added character is actually emoji
                                 emojisToAdd.forEach { emoji in
-                                    self.emojis.insert(String(emoji))
+                                    emojis.insert(String(emoji))
                                 }
+                                emojisToAdd = ""
                             }
                         } label: {
                             Text("Add")
@@ -84,16 +85,20 @@ struct EmojiThemeEditor: View {
                 }
                 
                 Section(header: Text("Emojis")) {
-                    Grid(Array(emojis), id: \.self) { emoji in
-                        Text(emoji)
-                            .font(Font.system(size: fontSize))
-                            .onTapGesture {
-                                withAnimation {
-                                    emojis = emojis.filter { $0 == emoji }
+                    LazyVGrid(columns: Array.init(repeating: GridItem(.flexible()), count: 4)) {
+                        ForEach(Array(emojis), id:\.self) { emoji in
+                            Text(emoji)
+                                .font(Font.system(size: fontSize))
+                                .onTapGesture {
+                                    if (emojis.count > 1) {
+                                        withAnimation {
+                                            emojis = emojis.filter { $0 != emoji }
+                                            numberOfPairs = numberOfPairs > emojis.count ? emojis.count : numberOfPairs
+                                        }
+                                    }
                                 }
-                            }
+                        }
                     }
-                    .frame(height: height)
                 }
                 
                 Section(header: Text("Card Count")) {
@@ -101,7 +106,7 @@ struct EmojiThemeEditor: View {
                         Stepper(
                             "\(numberOfPairs) Pairs",
                             value: $numberOfPairs,
-                            in: 1...8,
+                            in: 1...emojis.count,
                             step: 1
                         )
                     }
@@ -116,7 +121,7 @@ struct EmojiThemeEditor: View {
             name = theme.name
             numberOfPairs = theme.numberOfPairs
             emojis = Set(theme.emojis)
-            // /!\ Problem here because of encoding/decoding with UIColor which gives a different UIExtendedSRGBColorSpace instead of a wanted simple color
+            // TODO: Problem here because of encoding/decoding with UIColor which gives a different UIExtendedSRGBColorSpace instead of a wanted simple color
             color = colorOf(theme.color)
         }
     }
@@ -136,7 +141,7 @@ struct SelectableThemeColorGrid: View {
     @State var selectedThemeColor: Color
     
     private let cornerRadius = CGFloat(10)
-
+    
     var body: some View {
         LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4)) {
             ForEach(selectableColors, id:\.self) { color in
@@ -151,9 +156,9 @@ struct SelectableThemeColorGrid: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: cornerRadius)
                             .stroke(Color.black, lineWidth: selectedThemeColor == color ? 3 : 0)
-//                            .onAppear {
-//                                print("Theme Color <\(selectedThemeColor)> | Color <\(Color(UIColor(color)))> | Equals <\(selectedThemeColor == Color(UIColor(color)))>")
-//                            }
+                        //                            .onAppear {
+                        //                                print("Theme Color <\(selectedThemeColor)> | Color <\(Color(UIColor(color)))> | Equals <\(selectedThemeColor == Color(UIColor(color)))>")
+                        //                            }
                     )
             }
         }

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct EmojiTheme: Codable, Hashable, Identifiable {
+class EmojiTheme: ObservableObject, Codable, Hashable, Identifiable {
     var id: UUID = UUID()
     var name: String
     var emojis: [String]
@@ -45,7 +45,7 @@ struct EmojiTheme: Codable, Hashable, Identifiable {
         self.numberOfPairs = numberOfPairs
     }
     
-    init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         id = try container.decode(UUID.self, forKey: .id)

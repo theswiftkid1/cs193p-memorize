@@ -11,7 +11,7 @@ import SwiftUI
 struct ThemeRowView: View {
     @EnvironmentObject var store: EmojiThemeStore
 
-    @State var theme: EmojiTheme
+    @ObservedObject var theme: EmojiTheme
 
     @Binding var editMode: EditMode
 
@@ -27,12 +27,7 @@ struct ThemeRowView: View {
             .onTapGesture {
                 showThemeEditor = true
             }
-            .sheet(isPresented: $showThemeEditor, onDismiss: {
-                // TODO race condition ?
-                if let savedTheme = store.findTheme(theme) {
-                    theme = savedTheme
-                }
-            }) {
+            .sheet(isPresented: $showThemeEditor) {
                 EmojiThemeEditor(theme: theme, isShowing: $showThemeEditor)
                     .environmentObject(store)
             }
