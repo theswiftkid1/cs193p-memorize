@@ -85,7 +85,7 @@ struct EmojiThemeEditor: View {
                 }
                 
                 Section(header: Text("Emojis")) {
-                    LazyVGrid(columns: Array.init(repeating: GridItem(.flexible()), count: 4)) {
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4)) {
                         ForEach(Array(emojis), id:\.self) { emoji in
                             Text(emoji)
                                 .font(Font.system(size: fontSize))

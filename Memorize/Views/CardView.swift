@@ -13,20 +13,20 @@ struct CardView: View {
     var theme: EmojiTheme
     
     @State private var animatedBonusRemaining: Double = 0
-    
+
+    var body: some View {
+        GeometryReader { geometry in
+            self.body(for: geometry.size)
+        }
+    }
+
     private func startBonusTimeAnimation() {
         animatedBonusRemaining = card.bonusTimeRemainingPercentage
         withAnimation(.linear(duration: card.bonusTimeRemaining)) {
             animatedBonusRemaining = 0
         }
     }
-    
-    private let fontScaleFactor: CGFloat = 0.7
-    
-    private func fontSize(for size: CGSize) -> CGFloat {
-        min(size.width, size.height) * fontScaleFactor
-    }
-    
+
     @ViewBuilder
     private func body(for size: CGSize) -> some View {
         if card.isFaceUp || !card.isMatched {
@@ -52,18 +52,20 @@ struct CardView: View {
                 .opacity(0.2)
                 
                 Text(card.content)
+                    .font(Font.system(size: fontSize(for: size)))
                     .rotationEffect(Angle.degrees(card.isMatched ? 360 : 0))
                     .animation(card.isMatched ? Animation.linear(duration: 1).repeatForever(autoreverses: false) : .default)
             }
             .cardify(isFaceUp: card.isFaceUp, theme: theme)
-            .font(Font.system(size: fontSize(for: size)))
             .transition(.scale)
         }
     }
-    
-    var body: some View {
-        GeometryReader { geometry in
-            self.body(for: geometry.size)
-        }
+
+    // MARK: Drawing Constants
+
+    private let fontScaleFactor: CGFloat = 0.7
+
+    private func fontSize(for size: CGSize) -> CGFloat {
+        min(size.width, size.height) * fontScaleFactor
     }
 }

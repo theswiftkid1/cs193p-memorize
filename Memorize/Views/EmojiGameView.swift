@@ -18,41 +18,41 @@ struct EmojiGameView: View {
         let rectangle = RoundedRectangle(cornerRadius: 20.0)
         
         switch game.model.theme.color {
-        case let .Solid(color):
-            return AnyView(
-                rectangle
-                    .stroke(color.color, lineWidth: 5)
-                    .foregroundColor(color.color)
-            )
-        case let .Gradient(gradientType):
-            return AnyView(rectangle.stroke(gradientType.gradient, lineWidth: 5))
+            case let .Solid(color):
+                return AnyView(
+                    rectangle
+                        .stroke(color.color, lineWidth: 5)
+                        .foregroundColor(color.color)
+                )
+            case let .Gradient(gradientType):
+                return AnyView(rectangle.stroke(gradientType.gradient, lineWidth: 5))
         }
     }
-    
+
     var body: some View {
         VStack {
             Text("Points: \(game.model.points)")
             
             Text("Time: \(gameTime) seconds")
                 .onReceive(timer) { _ in
-                    self.gameTime += 1
+                    gameTime += 1
                 }
-            
-            Grid(game.cards, id: \.self) { card in
+
+            Grid(game.cards) { card in
                 CardView(card: card, theme: game.model.theme).onTapGesture {
                     withAnimation(.easeInOut) {
-                        self.game.choose(card: card)
+                        game.choose(card: card)
                     }
                 }
-                .aspectRatio(self.cardAspectRatio, contentMode: .fit)
-                .padding()
+                .aspectRatio(cardAspectRatio, contentMode: .fit)
+                .padding(10)
             }
             .padding()
-            
+
             Button(action: {
                 withAnimation(.easeInOut) {
-                    self.game.newGame()
-                    self.gameTime = 0
+                    game.newGame()
+                    gameTime = 0
                 }
             }) {
                 Text("New Game")

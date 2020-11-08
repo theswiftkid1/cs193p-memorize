@@ -8,17 +8,14 @@
 
 import Foundation
 
-struct GameModel<CardContent: Hashable> {
-    private(set) var cards: Array<Card>
+struct GameModel<CardContent> where CardContent: Equatable {
+    private(set) var cards: [Card]
     private(set) var theme: EmojiTheme
     private(set) var points: Int
     
-    struct Card: Hashable, Identifiable {
-        static func == (lhs: Card, rhs: Card) -> Bool {
-            lhs.id == rhs.id
-        }
-        
+    struct Card: Identifiable {
         var id: Int
+
         var isFaceUp: Bool = false {
             didSet {
                 if isFaceUp {
@@ -29,11 +26,13 @@ struct GameModel<CardContent: Hashable> {
             }
             
         }
+
         var isMatched: Bool = false {
             didSet {
                 stopUsingBonusTime()
             }
         }
+
         var content: CardContent
         
         // MARK: - Bonus Time
@@ -61,11 +60,11 @@ struct GameModel<CardContent: Hashable> {
         var bonusPointsRemaining: Int {
             Int(bonusTimeRemaining)
         }
-        
+
         var hasEarnedBonus: Bool {
             isMatched && bonusTimeRemaining > 0
         }
-        
+
         var isConsumingBonusTime: Bool {
             isFaceUp && !isMatched && bonusTimeRemaining > 0
         }
@@ -97,9 +96,8 @@ struct GameModel<CardContent: Hashable> {
          cardContentFactory: (Int) -> CardContent) {
         self.theme = theme
         points = 0
-        cards = Array<Card>()
-        let maxThemePairsOfCards = theme.numberOfPairs >= theme.emojis.count ? theme.emojis.count - 1 : theme.numberOfPairs
-        for index in stride(from: maxThemePairsOfCards, to: 0, by: -1) {
+        cards = [Card]()
+        for index in 0..<theme.numberOfPairs {
             let content = cardContentFactory(index)
             cards.append(Card(id: index * 2, content: content))
             cards.append(Card(id: index * 2 + 1, content: content))
@@ -111,8 +109,8 @@ struct GameModel<CardContent: Hashable> {
 
     mutating func choose(card: Card) {
         if let cardIndex = cards.firstIndex(of: card),
-            !cards[cardIndex].isFaceUp,
-            !cards[cardIndex].isMatched {
+           !cards[cardIndex].isFaceUp,
+           !cards[cardIndex].isMatched {
             
             if let potentialMatch = currentFaceUpCardIndex {
                 if cards[potentialMatch].content == cards[cardIndex].content {
