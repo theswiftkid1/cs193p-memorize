@@ -24,7 +24,6 @@
 		CA2FCAED24B50CA3002B0403 /* EmojiGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2FCAEC24B50CA3002B0403 /* EmojiGame.swift */; };
 		CA414D87253E382A00B54171 /* Data+utf8.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA414D86253E382A00B54171 /* Data+utf8.swift */; };
 		CA468E2924D203DF00CCC289 /* Array+Only.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA468E2824D203DF00CCC289 /* Array+Only.swift */; };
-		CA5D650A24D4A0DF001D33FE /* EmojiThemesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5D650924D4A0DF001D33FE /* EmojiThemesManager.swift */; };
 		CA650A0524C0EFE3002FFBF7 /* Array+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA650A0424C0EFE3002FFBF7 /* Array+Identifiable.swift */; };
 		CAD5036E254497C900E56B6E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5036D254497C900E56B6E /* HomeView.swift */; };
 		CAD503732544A11E00E56B6E /* EmojiThemeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD503722544A11E00E56B6E /* EmojiThemeStore.swift */; };
@@ -54,7 +53,6 @@
 		CA2FCAEC24B50CA3002B0403 /* EmojiGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiGame.swift; sourceTree = "<group>"; };
 		CA414D86253E382A00B54171 /* Data+utf8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+utf8.swift"; sourceTree = "<group>"; };
 		CA468E2824D203DF00CCC289 /* Array+Only.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Only.swift"; sourceTree = "<group>"; };
-		CA5D650924D4A0DF001D33FE /* EmojiThemesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiThemesManager.swift; sourceTree = "<group>"; };
 		CA650A0424C0EFE3002FFBF7 /* Array+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Identifiable.swift"; sourceTree = "<group>"; };
 		CAD5036D254497C900E56B6E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CAD503722544A11E00E56B6E /* EmojiThemeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiThemeStore.swift; sourceTree = "<group>"; };
@@ -78,7 +76,6 @@
 		45B0E8582546143A004ED0EC /* Themes */ = {
 			isa = PBXGroup;
 			children = (
-				CA5D650924D4A0DF001D33FE /* EmojiThemesManager.swift */,
 				CAD503722544A11E00E56B6E /* EmojiThemeStore.swift */,
 				45B0E85B25461496004ED0EC /* ThemeColor.swift */,
 				456627B72554AF05009ECDC7 /* EmojiTheme.swift */,
@@ -252,7 +249,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA20F65C253E29F9002755F9 /* MemorizeApp.swift in Sources */,
-				CA5D650A24D4A0DF001D33FE /* EmojiThemesManager.swift in Sources */,
 				CA2FCADB24B50BF7002B0403 /* EmojiGameView.swift in Sources */,
 				CA468E2924D203DF00CCC289 /* Array+Only.swift in Sources */,
 				CAD503732544A11E00E56B6E /* EmojiThemeStore.swift in Sources */,

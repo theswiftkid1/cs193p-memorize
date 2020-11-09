@@ -11,31 +11,42 @@ import SwiftUI
 struct ThemeRowView: View {
     @EnvironmentObject var store: EmojiThemeStore
 
-    @ObservedObject var theme: EmojiTheme
+    private(set) var theme: EmojiTheme
+    @State var themeName: String = ""
+    @State var emojis: [String] = []
 
     @Binding var editMode: EditMode
 
     @State var showThemeEditor: Bool = false
 
     var body: some View {
-        if (editMode.isEditing) {
-            VStack(alignment: .leading, spacing: 10) {
-                Text("Edit " + theme.name)
-                    .foregroundColor(.blue)
-                Text(theme.emojis.joined())
+        Group {
+            if (editMode.isEditing) {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Edit " + themeName)
+                        .foregroundColor(.blue)
+                    Text(emojis.joined())
+                }
+                .onTapGesture {
+                    showThemeEditor = true
+                }
+                .sheet(isPresented: $showThemeEditor, onDismiss: {
+                    let updatedTheme = store.findTheme(theme)!
+                    themeName = updatedTheme.name
+                    emojis = updatedTheme.emojis
+                }) {
+                    EmojiThemeEditor(theme: theme, isShowing: $showThemeEditor)
+                        .environmentObject(store)
+                }
+            } else {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(themeName)
+                    Text(emojis.joined())
+                }
             }
-            .onTapGesture {
-                showThemeEditor = true
-            }
-            .sheet(isPresented: $showThemeEditor) {
-                EmojiThemeEditor(theme: theme, isShowing: $showThemeEditor)
-                    .environmentObject(store)
-            }
-        } else {
-            VStack(alignment: .leading, spacing: 10) {
-                Text(theme.name)
-                Text(theme.emojis.joined())
-            }
+        }.onAppear {
+            themeName = theme.name
+            emojis = theme.emojis
         }
     }
 }

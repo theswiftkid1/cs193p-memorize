@@ -17,7 +17,7 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(store.themesManager.themes) { theme in
+                ForEach(store.themes) { theme in
                     NavigationLink(
                         destination:
                             EmojiGameView(game: EmojiGame(theme: theme))
@@ -31,7 +31,7 @@ struct HomeView: View {
                     }
                 }
                 .onDelete { indexSet in
-                    indexSet.map { store.themesManager.themes[$0] }.forEach { theme in
+                    indexSet.map { store.themes[$0] }.forEach { theme in
                         store.removeTheme(theme)
                     }
                 }
