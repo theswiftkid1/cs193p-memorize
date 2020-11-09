@@ -26,28 +26,28 @@ struct Cardify: AnimatableModifier {
         rotation = isFaceUp ? 0 : 180
         self.theme = theme
     }
-    
+
+    @ViewBuilder
+    private func coloredShape<S: Shape>(shape: S) -> some View {
+        switch theme.color {
+        case let .Solid(color):
+            shape.fill(color.color)
+        case let .Gradient(gradientType):
+            shape.fill(gradientType.gradient)
+        }
+    }
+
     private var CardBorder: some View {
         let rectangle = RoundedRectangle(cornerRadius: cornerRadius)
             .stroke(lineWidth: edgeLineWidth)
-        
-        switch theme.color {
-        case let .Solid(color):
-            return AnyView(rectangle.fill(color.color))
-        case let .Gradient(gradientType):
-            return AnyView(rectangle.fill(gradientType.gradient))
-        }
+
+        return coloredShape(shape: rectangle)
     }
     
     private var CardBack: some View {
         let rectangle = RoundedRectangle(cornerRadius: cornerRadius)
-        
-        switch theme.color {
-        case let .Solid(color):
-            return AnyView(rectangle.fill(color.color))
-        case let .Gradient(gradientType):
-            return AnyView(rectangle.fill(gradientType.gradient))
-        }
+
+        return coloredShape(shape: rectangle)
     }
     
     func body(content: Content) -> some View {

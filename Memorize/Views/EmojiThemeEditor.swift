@@ -19,10 +19,9 @@ struct EmojiThemeEditor: View {
     @State private var name: String = ""
     @State private var numberOfPairs: Int = 0
     @State private var emojis: Set<String> = ["😁"]
-    @State private var color: Color = .black
-    @State private var selectableColors = EmojiTheme.availableThemeColors
+    @State private var color: ThemeColor = ThemeColor.defaultColor
     @State private var emojisToAdd: String = ""
-    
+
     let fontSize: CGFloat = 40
     var height: CGFloat {
         CGFloat((theme.emojis.count - 1) / 6 * 70 + 70)
@@ -48,7 +47,7 @@ struct EmojiThemeEditor: View {
                         store.updateTheme(
                             theme: theme,
                             name: name,
-                            color: ThemeColor.Solid(CodableColor(color: color)),
+                            color: color,
                             emojis: Array(emojis),
                             numberOfPairs: numberOfPairs
                         )
@@ -113,7 +112,7 @@ struct EmojiThemeEditor: View {
                 }
                 
                 Section(header: Text("Color")) {
-                    SelectableThemeColorGrid(selectableColors: selectableColors, selectedThemeColor: color)
+                    SelectableThemeColorGrid(selectedThemeColor: $color)
                 }
             }
         }
@@ -121,32 +120,33 @@ struct EmojiThemeEditor: View {
             name = theme.name
             numberOfPairs = theme.numberOfPairs
             emojis = Set(theme.emojis)
-            // TODO: Problem here because of encoding/decoding with UIColor which gives a different UIExtendedSRGBColorSpace instead of a wanted simple color
-            color = colorOf(theme.color)
-        }
-    }
-    
-    func colorOf(_ theme: ThemeColor) -> Color {
-        switch theme {
-        case .Solid(let codableColor):
-            return codableColor.color
-        default:
-            return .black
+            color = theme.color
         }
     }
 }
 
 struct SelectableThemeColorGrid: View {
-    private(set) var selectableColors: [Color]
-    @State var selectedThemeColor: Color
+    private(set) var selectableColors: [ThemeColor] = ThemeColor.allCases
+    @Binding var selectedThemeColor: ThemeColor
     
     private let cornerRadius = CGFloat(10)
-    
+
+    @ViewBuilder
+    private func colorView(color: ThemeColor) -> some View {
+        switch color {
+            case .Solid(let codableColor):
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(codableColor.color)
+            case .Gradient(let codableGradient):
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(codableGradient.gradient)
+        }
+    }
+
     var body: some View {
         LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4)) {
-            ForEach(selectableColors, id:\.self) { color in
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(color)
+            ForEach(selectableColors, id:\.id) { color in
+                colorView(color: color)
                     .aspectRatio(1, contentMode: .fit)
                     .onTapGesture {
                         withAnimation(.linear(duration: 0.1)) {
@@ -156,9 +156,6 @@ struct SelectableThemeColorGrid: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: cornerRadius)
                             .stroke(Color.black, lineWidth: selectedThemeColor == color ? 3 : 0)
-                        //                            .onAppear {
-                        //                                print("Theme Color <\(selectedThemeColor)> | Color <\(Color(UIColor(color)))> | Equals <\(selectedThemeColor == Color(UIColor(color)))>")
-                        //                            }
                     )
             }
         }
@@ -170,7 +167,7 @@ struct EmojiThemeEditor_Previews: PreviewProvider {
         let theme = EmojiTheme(
             name: "Emojis",
             emojis: ["😇","😎","😘","😁","🧐","🥳","🤩"],
-            color: .Solid(CodableColor(color: .blue)),
+            color: ThemeColor.defaultColor,
             numberOfPairs: 4
         )
         

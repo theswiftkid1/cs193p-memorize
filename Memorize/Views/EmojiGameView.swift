@@ -71,7 +71,7 @@ struct GameView_Previews: PreviewProvider {
         let game = EmojiGame(theme: EmojiTheme(
             name: "Untitled",
             emojis: [],
-            color: .Solid(CodableColor(color: .red)),
+            color: ThemeColor.defaultColor,
             numberOfPairs: 0
         ))
         game.choose(card: game.cards[2])

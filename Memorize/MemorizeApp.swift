@@ -16,37 +16,37 @@ struct MemorizeApp: App {
         EmojiTheme(
             name: "Emojis",
             emojis: ["😇","😎","😘","😁","🧐","🥳","🤩"],
-            color: .Solid(CodableColor(color: .blue)),
+            color: .Solid(CodableColor(rgbaColor: UIColor.systemBlue.rgba)),
             numberOfPairs: 4
         ),
         EmojiTheme(
             name: "Places",
             emojis: ["🌇","🎇","🌄","🌌","🌉","🌅","🏞"],
-            color: .Solid(CodableColor(color: .green)),
+            color: .Solid(CodableColor(rgbaColor: UIColor.systemGreen.rgba)),
             numberOfPairs: 3
         ),
         EmojiTheme(
             name: "Fire",
             emojis: ["💯","❗️","♥️","🚩","🎈","💥","🔥"],
-            color: .Solid(CodableColor(color: .red)),
+            color: .Solid(CodableColor(rgbaColor: UIColor.systemRed.rgba)),
             numberOfPairs: 6
         ),
         EmojiTheme(
             name: "Apple",
             emojis: ["👨‍💻","👩‍💻","📱","💻","🖥","🖱","⌨️"],
-            color: .Solid(CodableColor(color: .gray)),
+            color: .Solid(CodableColor(rgbaColor: UIColor.systemGray.rgba)),
             numberOfPairs: 5
         ),
         EmojiTheme(
             name: "Music",
             emojis: ["👩‍🎤","🎸","🎤","🎻","🎺","🥁","👨‍🎤"],
-            color: .Solid(CodableColor(color: .purple)),
+            color: .Solid(CodableColor(rgbaColor: UIColor.systemPurple.rgba)),
             numberOfPairs: 4
         ),
         EmojiTheme(
-            name: "Dark",
+            name: "Black and yellow",
             emojis: ["🖤","♣️","🏴","♠️","🕶","🎱","☕️"],
-            color: .Solid(CodableColor(color: .black)),
+            color: .Solid(CodableColor(rgbaColor: UIColor.systemYellow.rgba)),
             numberOfPairs: 4
         ),
         EmojiTheme(

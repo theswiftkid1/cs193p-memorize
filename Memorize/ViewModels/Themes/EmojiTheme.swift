@@ -18,21 +18,10 @@ struct EmojiTheme: Codable, Hashable, Identifiable {
     static let defaultTheme = EmojiTheme(
         name: "Untitled",
         emojis: [],
-        color: .Solid(CodableColor(color: .gray)),
+        color: ThemeColor.defaultColor,
         numberOfPairs: 0
     )
-    
-    static let availableThemeColors: [Color] = [
-        .red,
-        .blue,
-        .green,
-        .gray,
-        .purple,
-        .pink,
-        .orange,
-        .black
-    ]
-    
+
     // MARK: Init
     
     init(name: String,

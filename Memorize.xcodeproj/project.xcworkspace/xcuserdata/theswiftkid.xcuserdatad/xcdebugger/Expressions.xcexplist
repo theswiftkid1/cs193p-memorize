@@ -3,6 +3,17 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #3 in ThemeRowView.body.getter:ThemeRowView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "theme">
+            </PersistentString>
+            <PersistentString
+               value = "store.findTheme(theme)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in EmojiGameView.body.getter:EmojiGameView.swift">
          <PersistentStrings>
             <PersistentString
@@ -25,16 +36,48 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Cardify.init(isFaceUp:theme:):Cardify.swift">
-      </ContextState>
-      <ContextState
-         contextName = "EmojiThemeEditor.body.getter:EmojiThemeEditor.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #1 in closure #2 in closure #2 in closure #1 in EmojiThemeEditor.body.getter:EmojiThemeEditor.swift">
+         contextName = "EmojiGame.cards.getter:EmojiGame.swift">
          <PersistentStrings>
             <PersistentString
-               value = "emojisToAdd">
+               value = "model">
+            </PersistentString>
+            <PersistentString
+               value = "model.cards">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #5 in closure #2 in closure #1 in EmojiThemeEditor.body.getter:EmojiThemeEditor.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "color">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in EmojiThemeChooser.body.getter:EmojiThemeChooser.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ThemeColor.init(from:):EmojiTheme.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "decoder.unkeyedContainer()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in SelectableThemeColorGrid.body.getter:EmojiThemeEditor.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "color.hashValue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SelectableThemeColorGrid.body.getter:EmojiThemeEditor.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selectedThemeColor">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -65,6 +108,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "EmojiTheme.init(id:):EmojiTheme.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Dictionary&lt;&gt;.asPropertyList.getter:EmojiThemeStore.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in SelectableThemeColorGrid.body.getter:EmojiThemeEditor.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selectableColors">
+            </PersistentString>
+            <PersistentString
+               value = "selectableColors[0].hashValue">
+            </PersistentString>
+            <PersistentString
+               value = "selectableColors[1].hashValue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "SelectableColorView.selected():EmojiThemeEditor.swift">
          <PersistentStrings>
             <PersistentString
@@ -72,52 +135,6 @@
             </PersistentString>
             <PersistentString
                value = "color">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "EmojiGame.cards.getter:EmojiGame.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "model">
-            </PersistentString>
-            <PersistentString
-               value = "model.cards">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "CardView.body(for:):CardView.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in EmojiThemeStore.init():EmojiThemeStore.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.themes">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #5 in closure #2 in closure #1 in EmojiThemeEditor.body.getter:EmojiThemeEditor.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "color">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "EmojiThemeStore.findTheme(_:):EmojiThemeStore.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "themes[themeIndex]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "EmojiGameView.game.getter:EmojiGameView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "game.cards">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -130,69 +147,32 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Grid.body(for:in:):Grid.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "_items">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #3 in ThemeRowView.body.getter:ThemeRowView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "theme">
-            </PersistentString>
-            <PersistentString
-               value = "store.findTheme(theme)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "EmojiThemeEditor.colorOf(_:):EmojiThemeEditor.swift">
       </ContextState>
       <ContextState
-         contextName = "closure #2 in closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in EmojiThemeChooser.body.getter:EmojiThemeChooser.swift">
+         contextName = "EmojiThemeStore.findTheme(_:):EmojiThemeStore.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "themes[themeIndex]">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "EmojiTheme.init(id:):EmojiTheme.swift">
+         contextName = "EmojiThemeStore.updateTheme(_:):EmojiThemeStore.swift">
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in closure #1 in HomeView.body.getter:HomeView.swift">
+         contextName = "Cardify.init(isFaceUp:theme:):Cardify.swift">
       </ContextState>
       <ContextState
-         contextName = "Dictionary&lt;&gt;.asPropertyList.getter:EmojiThemeStore.swift">
-      </ContextState>
-      <ContextState
-         contextName = "EmojiThemeStore.themes.getter:EmojiThemeStore.swift">
+         contextName = "closure #1 in EmojiThemeStore.init():EmojiThemeStore.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.themes">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "Dictionary&lt;&gt;.init(fromPropertyList:):EmojiThemeStore.swift">
-      </ContextState>
-      <ContextState
-         contextName = "CardView.init(card:theme:):CardView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "theme">
-            </PersistentString>
-            <PersistentString
-               value = "animatedBoniusRemaining">
-            </PersistentString>
-            <PersistentString
-               value = "self">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #2 in closure #1 in EmojiGameView.body.getter:EmojiGameView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "game.cards">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in EmojiThemeStore.init(named:):EmojiThemeStore.swift">
       </ContextState>
       <ContextState
          contextName = "closure #2 in EmojiThemeEditor.body.getter:EmojiThemeEditor.swift">
@@ -212,20 +192,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in Grid.body(for:in:):Grid.swift">
-      </ContextState>
-      <ContextState
-         contextName = "ThemeColor.init(from:):EmojiTheme.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "decoder.unkeyedContainer()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "EmojiThemeStore.updateTheme(_:):EmojiThemeStore.swift">
-      </ContextState>
-      <ContextState
          contextName = "EmojiThemeStore.renameTheme(_:to:):EmojiThemeStore.swift">
          <PersistentStrings>
             <PersistentString
@@ -234,10 +200,66 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "SelectableThemeColorGrid.body.getter:EmojiThemeEditor.swift">
+         contextName = "CardView.init(card:theme:):CardView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "selectedThemeColor">
+               value = "theme">
+            </PersistentString>
+            <PersistentString
+               value = "self">
+            </PersistentString>
+            <PersistentString
+               value = "animatedBoniusRemaining">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "EmojiThemeEditor.body.getter:EmojiThemeEditor.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Grid.body(for:in:):Grid.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "_items">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #2 in closure #2 in closure #1 in EmojiThemeEditor.body.getter:EmojiThemeEditor.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "emojisToAdd">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in EmojiThemeStore.init(named:):EmojiThemeStore.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in Grid.body(for:in:):Grid.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in EmojiGameView.body.getter:EmojiGameView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "game.cards">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CardView.body(for:):CardView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "EmojiThemeStore.themes.getter:EmojiThemeStore.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in HomeView.body.getter:HomeView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "EmojiGameView.game.getter:EmojiGameView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "game.cards">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

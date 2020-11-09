@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-// MARK: - ThemeGradient
+// MARK: - CodableGradient
 
-enum ThemeGradient: String, Codable {
+enum CodableGradient: String, Codable {
     case Rainbow
     
     var gradient: AngularGradient {
@@ -26,52 +26,39 @@ enum ThemeGradient: String, Codable {
 // MARK: - CodableColor
 
 public struct CodableColor: Codable, Hashable {
-    let uiColor: UIColor
-    let color: Color
-        
-    init(color: Color) {
-        self.color = color
-        self.uiColor = UIColor(color)
-    }
-    
-    public func encode(to encoder: Encoder) throws {
-        let nsCoder = NSKeyedArchiver(requiringSecureCoding: true)
-        uiColor.encode(with: nsCoder)
-        var container = encoder.unkeyedContainer()
-        try container.encode(nsCoder.encodedData)
-    }
-
-    private enum ColorCodingError: Error {
-        case decoding(String)
-    }
-
-    public init(from decoder: Decoder) throws {
-        var container = try decoder.unkeyedContainer()
-        let decodedData = try container.decode(Data.self)
-        let nsCoder = try NSKeyedUnarchiver(forReadingFrom: decodedData)
-        guard let uiColor = UIColor(coder: nsCoder) else {
-            throw ColorCodingError.decoding("Color decoding error")
-        }
-        self.uiColor = uiColor
-        self.color = Color(uiColor)
+    let rgbaColor: UIColor.RGBA
+    var color: Color {
+        Color(UIColor(rgbaColor))
     }
 }
 
 // MARK: - ThemeColor
 
-enum ThemeColor {
+enum ThemeColor: CaseIterable, Identifiable {
+    var id: Int { hashValue }
+
+    static let defaultColor: ThemeColor =
+        .Solid(CodableColor(rgbaColor: UIColor.red.rgba))
+
+    static var allCases: [ThemeColor] = [
+        .Solid(CodableColor(rgbaColor: UIColor.systemRed.rgba)),
+        .Solid(CodableColor(rgbaColor: UIColor.systemGreen.rgba)),
+        .Solid(CodableColor(rgbaColor: UIColor.systemBlue.rgba)),
+        .Solid(CodableColor(rgbaColor: UIColor.systemYellow.rgba)),
+        .Solid(CodableColor(rgbaColor: UIColor.systemPink.rgba)),
+        .Solid(CodableColor(rgbaColor: UIColor.systemOrange.rgba)),
+        .Solid(CodableColor(rgbaColor: UIColor.systemGray.rgba)),
+        .Gradient(.Rainbow),
+    ]
+
     case Solid(CodableColor)
-    case Gradient(ThemeGradient)    
+    case Gradient(CodableGradient)
 }
 
 extension ThemeColor: Codable, Hashable {
+
     static func == (lhs: ThemeColor, rhs: ThemeColor) -> Bool {
-        switch (lhs, rhs) {
-        case (.Solid, .Solid), (.Gradient, .Gradient):
-            return true
-        default:
-            return false
-        }
+        lhs.id == rhs.id
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -89,7 +76,7 @@ extension ThemeColor: Codable, Hashable {
             self = .Solid(value)
             return
         }
-        if let value = try? values.decode(ThemeGradient.self, forKey: .gradient) {
+        if let value = try? values.decode(CodableGradient.self, forKey: .gradient) {
             self = .Gradient(value)
             return
         }
